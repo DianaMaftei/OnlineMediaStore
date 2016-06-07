@@ -34,7 +34,7 @@ public class CDProduct extends Media {
 
 	@Override
 	public String toString() {
-		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nArtist: " + artist + "\nTracks: " + "sooo many tracks" + "\n" +
+		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nArtist: " + artist + "\nTracks: " + getTrackList() + "\n" +
 				"---------------------------";
 	}
 	

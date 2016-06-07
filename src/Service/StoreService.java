@@ -14,7 +14,9 @@ public class StoreService {
 	}
 	
 	public int displayItems(){
-		System.out.println("If you want to see our collection of DVDs, press 1.\n" + "If you want to see our collection of CDs, press 2.\n" + "If you want to see our collection of books, press 3.\n");
+		System.out.println("If you want to see our collection of DVDs, press 1.\n" 
+				+ "If you want to see our collection of CDs, press 2.\n" 
+				+ "If you want to see our collection of books, press 3.\n");
 		int userOption = userInput.nextInt();
 		
 		switch(userOption){
