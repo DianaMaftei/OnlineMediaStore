@@ -37,8 +37,7 @@ public class BookProduct extends Media{
 
 	@Override
 	public String toString() {
-		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nAuthors: " + getAuthors() + "\nNumber of Pages: " + noOfPages + "\nPublishing House: " + publishingHouse + "\n" + 
-				"---------------------------";
+		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nAuthors: " + getAuthors() + "\nNumber of Pages: " + noOfPages + "\nPublishing House: " + publishingHouse + "\n";
 	}
 
 	

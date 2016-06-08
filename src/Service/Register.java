@@ -13,7 +13,7 @@ public class Register {
 	public Client registerClient(){
 		getRegisterInfo();
 		Client newClient = new Client(fullName, userID, password);
-		OnlineMedia.getClients().add(newClient);
+		OnlineStoreMain.getClients().add(newClient);
 		return newClient;
 	}
 
@@ -27,7 +27,7 @@ public class Register {
 	}
 
 	private boolean doesUserExist(String userID) {
-		for (Client user : OnlineMedia.getClients()) {
+		for (Client user : OnlineStoreMain.getClients()) {
 			if (userID.equalsIgnoreCase(user.getUserID())) {
 				System.out.println("This userID already exists. Please choose another.");
 				return true;

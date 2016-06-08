@@ -44,8 +44,6 @@ public class DataFunctionProperties {
 			dvd.setDescription(description);
 			dvd.setSeasonNo(seasonNo);
 			dvd.setDirector(director);
-			System.out.println(idx);
-			System.out.println(dvd);
 			idx++;
 			dvds.add(dvd);
 		}
@@ -84,8 +82,6 @@ public class DataFunctionProperties {
 				trackList.add(new Track(songName, duration));
 			}
 			cd.setTrackList(trackList);
-			System.out.println(idx);
-			System.out.println(cd);
 			idx++;
 			cds.add(cd);
 		}
@@ -123,8 +119,6 @@ public class DataFunctionProperties {
 			book.setAuthors(authorsList);
 			book.setNoOfPages(Integer.valueOf(noOfPages));
 			book.setPublishingHouse(publishingHouse);
-			System.out.println(idx);
-			System.out.println(book);
 			idx++;
 			books.add(book);
 		}

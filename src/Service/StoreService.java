@@ -1,45 +1,89 @@
 package Service;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class StoreService {
-	private Scanner userInput = new Scanner(System.in);
+import entity.Client;
+import entity.Media;
 
-	public String displayMainMenu(){
-		System.out.println("Welcome to our online store!");
-		System.out.println("What is your name? ");
-		String name = userInput.nextLine();
-		System.out.println("Hello " + name + ", check out our variety of items on sale.");
-		return name;		
-	}
-	
-	public int displayItems(){
-		System.out.println("If you want to see our collection of DVDs, press 1.\n" 
-				+ "If you want to see our collection of CDs, press 2.\n" 
-				+ "If you want to see our collection of books, press 3.\n");
+public class StoreService {
+	public static int currentProductList;
+	private static Scanner userInput = new Scanner(System.in);
+
+	private int getUserOption() {
 		int userOption = userInput.nextInt();
-		
-		switch(userOption){
-		case 1:
-			OnlineMedia.dataFunctionProperties.getAllDVDs();
-			break;
-		case 2:
-			OnlineMedia.dataFunctionProperties.getAllCDs();
-			break;
-		case 3:
-			OnlineMedia.dataFunctionProperties.getAllBooks();
-			break;
-		default:
-			System.out.println("This is not a valid option.");
-			return -1;
-		}
 		return userOption;
 	}
-	
-	public int getItemNo(){
-		System.out.println("Which option would you like to purchase?");
-		int itemNo = userInput.nextInt();
-		return itemNo;
+
+	private void displayLoginMenu() {
+		System.out.println("Welcome to our online store!");
+		System.out
+				.println("Would you like to: \n" + "\t 1. Login\n" + "\t 2. Register\n" + "\t 3. Continue as guest\n");
+	}
+
+	private void selectLoginOption(int userOption) {
+		switch (userOption) {
+		case 1:
+			new Login().doLogin();
+			break;
+		case 2:
+			// register a new user and log them in automatically
+			new Login().loginRegisteredUser(new Register().registerClient());
+			break;
+		case 3:
+			//create a temp guest account and login with it
+			Client guestUser = new Client("guest", "guest", "0000");
+			Login.setCurrentUser(guestUser);
+			break;
+		default:
+			System.err.println("Invalid option.");
+			return;
+		}
+		System.out.println("Welcome " + Login.getCurrentUser().getName() + "!");
+	}
+
+	public void doLogin() {
+		displayLoginMenu();
+		int currentUserOption = getUserOption();
+		selectLoginOption(currentUserOption);
+	}
+
+	public void displayItemsMenu() {
+		showProductsMenu();
+		int listToDisplay = getUserOption();
+		displayItems(listToDisplay);
+	}
+
+	private void showProductsMenu() {
+		System.out.println("To see our collection of DVDs, press 1.\n" + "To see our collection of CDs, press 2.\n"
+				+ "To see our collection of books, press 3.");
+	}
+
+	public void displayItems(int userOption) {
+		currentProductList = userOption;
+		switch (userOption) {
+		case 1:
+			listItemsInStock(OnlineStoreMain.dataFunctionProperties.dvds);
+			break;
+		case 2:
+			listItemsInStock(OnlineStoreMain.dataFunctionProperties.cds);
+			break;
+		case 3:
+			listItemsInStock(OnlineStoreMain.dataFunctionProperties.books);
+			break;
+		default:
+			System.err.println("This is not a valid option.");
+			break;
+		}
 	}
 	
+	private void listItemsInStock(ArrayList<? extends Media> list){
+		int index = 1;
+		for(Media item : list){
+			System.out.println(index);
+			System.out.println(item);
+			index++;
+		}
+	}
+
 }

@@ -29,8 +29,7 @@ public class DVDProduct extends Media {
 
 	@Override
 	public String toString() {
-		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nSeason Number: " + seasonNo + "\nDirector: " + director + "\n" +
-	"---------------------------";
+		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nSeason Number: " + seasonNo + "\nDirector: " + director + "\n";
 		
 		
 		

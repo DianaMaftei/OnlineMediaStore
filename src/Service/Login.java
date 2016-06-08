@@ -35,7 +35,7 @@ public class Login {
 	}
 
 	private boolean loginUser(String userID, String password) {
-		for (Client user : OnlineMedia.getClients()) {
+		for (Client user : OnlineStoreMain.getClients()) {
 			if (userID.equalsIgnoreCase(user.getUserID())) {
 				if (password.equalsIgnoreCase(user.getPassword())) {
 					System.out.println("You've successfully logged in!");
