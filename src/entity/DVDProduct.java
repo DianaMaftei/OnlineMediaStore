@@ -1,4 +1,8 @@
 package entity;
+/**
+*
+*@author Diana Maftei
+*/
 public class DVDProduct extends Media {
 	
 	private String seasonNo;

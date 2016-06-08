@@ -1,7 +1,10 @@
 package entity;
 
 import java.util.ArrayList;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class Client {
 	protected String name;
 	protected String userID;

@@ -6,7 +6,10 @@ import java.util.Properties;
 
 import entity.Client;
 import entity.Order;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class OnlineStoreMain {
 	public static Order currentOrder;
 	public static DataFunctionProperties dataFunctionProperties;

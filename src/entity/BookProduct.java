@@ -1,6 +1,9 @@
 package entity;
 import java.util.ArrayList;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class BookProduct extends Media{
 	
 	private ArrayList<String> authors;

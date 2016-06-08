@@ -5,7 +5,10 @@ import java.util.Scanner;
 
 import entity.Client;
 import entity.Media;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class StoreService {
 	public static int currentProductList;
 	private static Scanner userInput = new Scanner(System.in);

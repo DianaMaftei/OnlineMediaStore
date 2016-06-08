@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import entity.Media;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class OrderService {
 	public static boolean checkedOut;
 	private static Scanner userInput = new Scanner(System.in);

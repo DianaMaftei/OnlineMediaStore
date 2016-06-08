@@ -1,5 +1,8 @@
 package entity;
-
+/**
+*
+*@author Diana Maftei
+*/
 public enum Genre {
 	//Music
 	POP, ALTERNATIVE_ROCK, METAL, HIP_HOP, DANCE, JAZZ, COUNTRY,

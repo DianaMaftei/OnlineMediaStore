@@ -1,5 +1,8 @@
 package entity;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class Track {
 	String title;
 	int duration;

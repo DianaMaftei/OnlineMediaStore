@@ -9,7 +9,10 @@ import entity.CDProduct;
 import entity.DVDProduct;
 import entity.Genre;
 import entity.Track;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class DataFunctionProperties {
 	
 	public static ArrayList<DVDProduct> dvds = new ArrayList<>();

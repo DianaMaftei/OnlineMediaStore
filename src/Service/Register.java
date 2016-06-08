@@ -3,7 +3,10 @@ package Service;
 import java.util.Scanner;
 
 import entity.Client;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class Register {
 	private Scanner userInput = new Scanner(System.in);
 	private String fullName;

@@ -2,7 +2,10 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
+*
+*@author Diana Maftei
+*/
 public class Order {
 	private String clientName;
 	private Date issueDate;

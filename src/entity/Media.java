@@ -1,5 +1,8 @@
 package entity;
-
+/**
+*
+*@author Diana Maftei
+*/
 public abstract class Media {
 	private String title;
 	private double price;
