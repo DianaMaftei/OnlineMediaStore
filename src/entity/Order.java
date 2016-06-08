@@ -6,12 +6,14 @@ public class Order {
 	private String clientName;
 	private String issueDate;
 	private ArrayList<Media> clientCart;
+	private double totalCost;
 	
 	
 	public Order(String clientName) {
 		this.clientName = clientName;
 		this.issueDate = "now";
 		this.clientCart = new ArrayList<>();
+		this.totalCost = 0.0;
 	}
 
 
@@ -43,8 +45,20 @@ public class Order {
 	public void setClientCart(ArrayList<Media> clientBasket) {
 		this.clientCart = clientBasket;
 	}
-	
-	
-	
+
+	public double getTotalCost() {
+		return totalCost;
+	}
+
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Client Name: " + clientName + ", Issue Date: " + issueDate + ", Client Cart: " + clientCart;
+	}
 	
 }

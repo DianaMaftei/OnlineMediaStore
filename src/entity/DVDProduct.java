@@ -8,13 +8,6 @@ public class DVDProduct extends Media {
 		super();
 	}
 
-	public DVDProduct(String title, double price, Genre genre, String description, String seasonNo, String director) {
-		super(title, price, genre, description);
-		this.seasonNo = seasonNo;
-		this.director = director;
-	}
-
-
 	public String getSeasonNo() {
 		return seasonNo;
 	}

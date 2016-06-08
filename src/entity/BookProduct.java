@@ -11,13 +11,6 @@ public class BookProduct extends Media{
 		super();
 	}
 	
-	public BookProduct(String title, double price, Genre genre, String description, ArrayList<String> authors, int noOfPages, String publishingHouse) {
-		super(title, price, genre, description);
-		this.authors = authors;
-		this.noOfPages = noOfPages;
-		this.publishingHouse = publishingHouse;
-	}
-	
 	public ArrayList<String> getAuthors() {
 		return authors;
 	}

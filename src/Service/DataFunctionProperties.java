@@ -12,13 +12,17 @@ import entity.Track;
 
 public class DataFunctionProperties {
 	
+	public static ArrayList<DVDProduct> dvds = new ArrayList<>();
+	public static ArrayList<CDProduct> cds = new ArrayList<>();
+	public static ArrayList<BookProduct> books = new ArrayList<>();
+
 	Properties properties;
 	StringTokenizer stk;
-	
-	public DataFunctionProperties(Properties properties){
+
+	public DataFunctionProperties(Properties properties) {
 		this.properties = properties;
 	}
-	
+
 	public void getAllDVDs() {
 		int idx = 1;
 		while (true) {
@@ -43,20 +47,20 @@ public class DataFunctionProperties {
 			System.out.println(idx);
 			System.out.println(dvd);
 			idx++;
-
+			dvds.add(dvd);
 		}
 
 	}
-	
+
 	public void getAllCDs() {
 		int idx = 1;
 		while (true) {
 			String title = properties.getProperty("cd" + idx + ".title");
-			
+
 			if (title == null) {
 				break;
 			}
-			
+
 			String price = properties.getProperty("cd" + idx + ".price");
 			String genre = properties.getProperty("cd" + idx + ".genre");
 			String description = properties.getProperty("cd" + idx + ".description");
@@ -69,18 +73,21 @@ public class DataFunctionProperties {
 			cd.setGenre(Genre.valueOf(genre));
 			cd.setDescription(description);
 			cd.setArtist(artist);
+
 			ArrayList<Track> trackList = new ArrayList<>();
-			for(int i = 0; i < tracks.length; i++){
+			// populate the trackList with new Tracks parsed from the file,
+			// delimited by :
+			for (int i = 0; i < tracks.length; i++) {
 				stk = new StringTokenizer(tracks[i], ":");
 				String songName = stk.nextToken();
 				int duration = Integer.parseInt(stk.nextToken());
-				trackList.add(new Track(songName,duration));
+				trackList.add(new Track(songName, duration));
 			}
 			cd.setTrackList(trackList);
 			System.out.println(idx);
 			System.out.println(cd);
 			idx++;
-
+			cds.add(cd);
 		}
 
 	}
@@ -89,11 +96,11 @@ public class DataFunctionProperties {
 		int idx = 1;
 		while (true) {
 			String title = properties.getProperty("book" + idx + ".title");
-			
+
 			if (title == null) {
 				break;
 			}
-			
+
 			String price = properties.getProperty("book" + idx + ".price");
 			String genre = properties.getProperty("book" + idx + ".genre");
 			String description = properties.getProperty("book" + idx + ".description");
@@ -106,19 +113,20 @@ public class DataFunctionProperties {
 			book.setPrice(Double.valueOf(price));
 			book.setGenre(Genre.valueOf(genre));
 			book.setDescription(description);
-			
+
 			ArrayList<String> authorsList = new ArrayList<>();
-			for(int i = 0; i < authors.length; i++){
+			// populate the authorsList with names of authors parsed from the
+			// file
+			for (int i = 0; i < authors.length; i++) {
 				authorsList.add(authors[i]);
 			}
-			
 			book.setAuthors(authorsList);
 			book.setNoOfPages(Integer.valueOf(noOfPages));
 			book.setPublishingHouse(publishingHouse);
 			System.out.println(idx);
 			System.out.println(book);
 			idx++;
-
+			books.add(book);
 		}
 
 	}

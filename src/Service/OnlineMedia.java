@@ -6,6 +6,7 @@ import java.util.Properties;
 import entity.Order;
 
 public class OnlineMedia {
+	public static Order currentOrder;
 	public static DataFunctionProperties dataFunctionProperties;
 
 	public static void main(String[] args) throws Exception {
@@ -16,14 +17,12 @@ public class OnlineMedia {
 
 		StoreService storeService = new StoreService();
 		
-		Order currentOrder = new Order(storeService.displayMainMenu());
+		currentOrder = new Order(storeService.displayMainMenu());
 		int productType = storeService.displayItems();
 		int productNumber = storeService.getItemNo();
 		
 		OrderService orderService = new OrderService();
-		
 		orderService.addItemToCart(productType, productNumber);
-		
 		
 	}
 

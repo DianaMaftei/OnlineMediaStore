@@ -10,12 +10,6 @@ public class CDProduct extends Media {
 		super();
 	}
 
-	public CDProduct(String title, double price, Genre genre, String description, String artist, ArrayList<Track> trackList) {
-		super(title, price, genre, description);
-		this.artist = artist;
-		this.trackList = trackList;
-	}
-
 	public String getArtist() {
 		return artist;
 	}
