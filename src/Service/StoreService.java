@@ -21,7 +21,7 @@ public class StoreService {
 	private void displayLoginMenu() {
 		System.out.println("Welcome to our online store!");
 		System.out
-				.println("Would you like to: \n" + "\t 1. Login\n" + "\t 2. Register\n" + "\t 3. Continue as guest\n");
+				.println("Would you like to: \n" + "\t1. Login\n" + "\t2. Register\n" + "\t3. Continue as guest\n");
 	}
 
 	private void selectLoginOption(int userOption) {

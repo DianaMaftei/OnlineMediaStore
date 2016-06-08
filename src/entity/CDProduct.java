@@ -4,7 +4,7 @@ import java.util.ArrayList;
 *
 *@author Diana Maftei
 */
-public class CDProduct extends Media {
+public class CDProduct extends Media implements IPlayable{
 	
 	private String artist;
 	private ArrayList<Track> trackList;
@@ -32,6 +32,11 @@ public class CDProduct extends Media {
 	@Override
 	public String toString() {
 		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nArtist: " + artist + "\nTracks: " + getTrackList() + "\n";
+	}
+
+	@Override
+	public void play() {
+		System.out.println("CD is playing.");
 	}
 	
 	

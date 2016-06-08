@@ -70,12 +70,13 @@ public class OrderService {
 				"The item " + ((Media) mediaList.get(productNumber - 1)).getTitle() + " has been added to your cart.");
 		OnlineStoreMain.currentOrder.setTotalCost(
 				OnlineStoreMain.currentOrder.getTotalCost() + ((Media) mediaList.get(productNumber - 1)).getPrice());
-		System.out.println("Your total cost is: " + OnlineStoreMain.currentOrder.getTotalCost());
+		System.out.printf("Your total cost is: %.2f. \n", OnlineStoreMain.currentOrder.getTotalCost());
 	}
 
 	private void removeItemFromCart() {
 		System.out.println("Which item do you want to remove from your cart?");
-		OnlineStoreMain.currentOrder.getClientCart().remove(getUserOption());
+		System.out.println(OnlineStoreMain.currentOrder.getClientCart());
+		OnlineStoreMain.currentOrder.getClientCart().remove(getUserOption() - 1);
 	}
 
 	private void checkOut() {

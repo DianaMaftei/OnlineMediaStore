@@ -3,7 +3,7 @@ package entity;
 *
 *@author Diana Maftei
 */
-public class DVDProduct extends Media {
+public class DVDProduct extends Media implements IPlayable{
 	
 	private String seasonNo;
 	private String director;
@@ -37,6 +37,11 @@ public class DVDProduct extends Media {
 		
 		
 		
+	}
+
+	@Override
+	public void play() {
+		System.out.println("DVD is playing.");
 	} 
 	
 	

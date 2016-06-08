@@ -3,7 +3,7 @@ package entity;
 *
 *@author Diana Maftei
 */
-public class Track {
+public class Track implements IPlayable{
 	String title;
 	int duration;
 	
@@ -32,6 +32,12 @@ public class Track {
 	@Override
 	public String toString() {
 		return "Title: " + title + ", duration: " + duration;
+	}
+
+	@Override
+	public void play() {
+		System.out.println("Track is playing.");
+		
 	}
 	
 	
