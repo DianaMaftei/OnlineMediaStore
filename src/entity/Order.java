@@ -1,17 +1,18 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Order {
 	private String clientName;
-	private String issueDate;
+	private Date issueDate;
 	private ArrayList<Media> clientCart;
 	private double totalCost;
 	
 	
 	public Order(String clientName) {
 		this.clientName = clientName;
-		this.issueDate = "now";
+		this.issueDate = new Date();
 		this.clientCart = new ArrayList<>();
 		this.totalCost = 0.0;
 	}
@@ -27,12 +28,12 @@ public class Order {
 	}
 
 
-	public String getIssueDate() {
+	public Date getIssueDate() {
 		return issueDate;
 	}
 
 
-	public void setIssueDate(String issueDate) {
+	public void setIssueDate(Date issueDate) {
 		this.issueDate = issueDate;
 	}
 
