@@ -34,10 +34,9 @@ public class OnlineStoreMain {
 		StoreService storeService = new StoreService();
 		storeService.doLogin();		
 		currentOrder = new Order(Login.getCurrentUser().getName());
-		OrderService orderService = new OrderService();
+		
 		do{
-			storeService.displayItemsMenu();
-			orderService.doOrderService();
+			storeService.itemsMenu();
 		}while(!OrderService.checkedOut );
 	}
 	
