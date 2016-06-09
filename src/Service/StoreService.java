@@ -16,13 +16,18 @@ public class StoreService {
 	private static OrderService orderService = new OrderService();
 
 	private int getUserOption() {
-		int userOption = userInput.nextInt();
-		return userOption;
+		try {
+			int input = Integer.parseInt(userInput.next());
+			return input;
+		} catch (NumberFormatException n) {
+			System.out.println("Please enter a number.");
+			return -1;
+		}
 	}
 
 	private void displayLoginMenu() {
 		System.out.println("Welcome to our online store!");
-		System.out.println("Would you like to: \n" + "\t1. Login\n" + "\t2. Register\n" + "\t3. Continue as guest\n");
+		System.out.println("Would you like to: \n" + "\t1. Login\n" + "\t2. Register\n" + "\t3. Continue as guest");
 	}
 
 	private boolean selectLoginOption(int userOption) {
@@ -40,7 +45,7 @@ public class StoreService {
 			Login.setCurrentUser(guestUser);
 			break;
 		default:
-			System.out.println("Invalid option.");
+			System.out.println("Invalid option. Please choose one of the above.");
 			return false;
 		}
 		System.out.println("Welcome " + Login.getCurrentUser().getName() + "!");
@@ -48,12 +53,13 @@ public class StoreService {
 	}
 
 	public void doLogin() {
-		boolean loggedIn;;
-		do{
-		displayLoginMenu();
-		int currentUserOption = getUserOption();
-		loggedIn = selectLoginOption(currentUserOption);
-		}while(!loggedIn);
+		boolean loggedIn;
+		;
+		do {
+			displayLoginMenu();
+			int currentUserOption = getUserOption();
+			loggedIn = selectLoginOption(currentUserOption);
+		} while (!loggedIn);
 	}
 
 	public void itemsMenu() {
