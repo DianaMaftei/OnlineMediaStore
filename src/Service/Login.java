@@ -17,18 +17,6 @@ public class Login {
 		return currentUser;
 	}
 
-	public static void setCurrentUser(Client currentUser) {
-		if ("guest".equals(currentUser.getName())) {
-			Login.currentUser = currentUser;
-		}
-	}
-
-	private void displayLoginMenu() {
-		System.out.println("Welcome! Type your userID and password to login.");
-		userID = userInput.next();
-		password = userInput.next();
-	}
-
 	public void doLogin() {
 		boolean loggedIn;
 		do {
@@ -36,7 +24,13 @@ public class Login {
 			loggedIn = loginUser(userID, password);
 		} while (!loggedIn);
 	}
-
+	
+	private void displayLoginMenu() {
+		System.out.println("Type your userID and password to login.");
+		userID = userInput.next();
+		password = userInput.next();
+	}
+	
 	private boolean loginUser(String userID, String password) {
 		for (Client user : OnlineStoreMain.getClients()) {
 			if (userID.equalsIgnoreCase(user.getUserID())) {

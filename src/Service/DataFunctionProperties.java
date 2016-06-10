@@ -2,8 +2,6 @@ package Service;
 
 import java.util.ArrayList;
 import java.util.Properties;
-import java.util.StringTokenizer;
-
 import entity.BookProduct;
 import entity.CDProduct;
 import entity.DVDProduct;
@@ -20,7 +18,6 @@ public class DataFunctionProperties {
 	public static ArrayList<BookProduct> books = new ArrayList<>();
 
 	Properties properties;
-	StringTokenizer stk;
 
 	public DataFunctionProperties(Properties properties) {
 		this.properties = properties;
@@ -79,10 +76,8 @@ public class DataFunctionProperties {
 			// populate the trackList with new Tracks parsed from the file,
 			// delimited by :
 			for (int i = 0; i < tracks.length; i++) {
-				stk = new StringTokenizer(tracks[i], ":");
-				String songName = stk.nextToken();
-				int duration = Integer.parseInt(stk.nextToken());
-				trackList.add(new Track(songName, duration));
+				String[] trackByIndex = tracks[i].split(":");
+				trackList.add(new Track(trackByIndex[0], Integer.parseInt(trackByIndex[1])));
 			}
 			cd.setTrackList(trackList);
 			idx++;

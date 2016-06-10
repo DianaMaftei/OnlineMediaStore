@@ -2,67 +2,46 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 /**
-*
-*@author Diana Maftei
-*/
+ *
+ * @author Diana Maftei
+ */
 public class Order {
 	private String clientName;
 	private Date issueDate;
-	private ArrayList<Media> clientCart;
-	private double totalCost;
-	
-	
+	private ArrayList<OrderLine> orderLines;
+
+	public ArrayList<OrderLine> getOrderLines() {
+		return orderLines;
+	}
+
+	public void setOrderLines(ArrayList<OrderLine> orderLines) {
+		this.orderLines = orderLines;
+	}
+
 	public Order(String clientName) {
 		this.clientName = clientName;
 		this.issueDate = new Date();
-		this.clientCart = new ArrayList<>();
-		this.totalCost = 0.0;
+		this.orderLines = new ArrayList<OrderLine>();
 	}
-
 
 	public String getClientName() {
 		return clientName;
 	}
 
-
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
-	}
-
-
-	public Date getIssueDate() {
-		return issueDate;
-	}
-
-
-	public void setIssueDate(Date issueDate) {
-		this.issueDate = issueDate;
-	}
-
-
-	public ArrayList<Media> getClientCart() {
-		return clientCart;
-	}
-
-
-	public void setClientCart(ArrayList<Media> clientBasket) {
-		this.clientCart = clientBasket;
-	}
-
 	public double getTotalCost() {
+		double totalCost = 0;
+		for (OrderLine line : orderLines) {
+			totalCost += line.getPrice();
+		}
 		return totalCost;
 	}
 
-
-	public void setTotalCost(double totalCost) {
-		this.totalCost = totalCost;
-	}
-
-
 	@Override
 	public String toString() {
-		return "Client Name: " + clientName + ", Issue Date: " + issueDate + ", Client Cart: " + clientCart;
+		return "Client Name: " + clientName + ", Issue Date: " + issueDate + ", Client Cart: " + orderLines
+				+ ", Total: " + getTotalCost();
 	}
-	
+
 }

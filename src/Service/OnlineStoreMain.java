@@ -33,7 +33,6 @@ public class OnlineStoreMain {
 		
 		StoreService storeService = new StoreService();
 		storeService.doLogin();		
-		currentOrder = new Order(Login.getCurrentUser().getName());
 		
 		do{
 			storeService.itemsMenu();

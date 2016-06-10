@@ -6,10 +6,10 @@ import java.util.ArrayList;
 *@author Diana Maftei
 */
 public class Client {
-	protected String name;
-	protected String userID;
-	protected String password;
-	protected ArrayList<Order> clientOrders;
+	private String name;
+	private String userID;
+	private String password;
+	private ArrayList<Order> clientOrders;
 	
 	public Client(String name, String userID, String password) {
 		this.name = name;
@@ -27,6 +27,10 @@ public class Client {
 
 	public String getUserID() {
 		return userID;
+	}
+	
+	public ArrayList<Order> getClientOrders() {
+		return clientOrders;
 	}
 
 	@Override

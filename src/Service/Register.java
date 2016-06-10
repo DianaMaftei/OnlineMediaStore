@@ -21,7 +21,7 @@ public class Register {
 	}
 
 	private void getRegisterInfo() {
-		System.out.println("Welcome! Type your full name, your userID and the password for your new account.");
+		System.out.println("Type your full name, your userID and the password for your new account.");
 		fullName = userInput.nextLine();
 		do {
 			userID = userInput.next();

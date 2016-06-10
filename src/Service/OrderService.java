@@ -1,9 +1,8 @@
 package Service;
 
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import entity.Media;
+import entity.OrderLine;
 
 /**
  *
@@ -12,25 +11,34 @@ import entity.Media;
 public class OrderService {
 	public static boolean checkedOut;
 
-	public void addItem(ArrayList<?> mediaList, int productNumber) {
-
-		if ((productNumber > 0 && productNumber < mediaList.size())) {
-			OnlineStoreMain.currentOrder.getClientCart().add((Media) mediaList.get(productNumber - 1));
-			System.out.println("The item " + ((Media) mediaList.get(productNumber - 1)).getTitle()
+	public void addItemToCart(ArrayList<?> mediaList, int[] itemToAdd) {
+		// index 0 is the product index and index 1 is the quantity to remove
+		if ((itemToAdd[0] > 0 && itemToAdd[0] <= mediaList.size())) {
+			OnlineStoreMain.currentOrder.getOrderLines()
+					.add(new OrderLine(((Media) mediaList.get(itemToAdd[0] - 1)), itemToAdd[1]));
+			System.out.println("The item " + ((Media) mediaList.get(itemToAdd[0] - 1)).getTitle()
 					+ " has been added to your cart.");
-			OnlineStoreMain.currentOrder.setTotalCost(OnlineStoreMain.currentOrder.getTotalCost()
-					+ ((Media) mediaList.get(productNumber - 1)).getPrice());
 			System.out.printf("Your total cost is: %.2f. \n", OnlineStoreMain.currentOrder.getTotalCost());
 		} else {
 			System.out.println("Invalid option.");
 		}
 	}
 
-	public void removeItemFromCart(int itemToRemove) {
-		if (itemToRemove > 0 && itemToRemove < OnlineStoreMain.currentOrder.getClientCart().size()) {
-			Media productChosen = OnlineStoreMain.currentOrder.getClientCart().get(itemToRemove - 1);
-			OnlineStoreMain.currentOrder.getClientCart().remove(itemToRemove - 1);
-			System.out.println("The item " + productChosen.getTitle() + "has been removed from your cart.");
+	public void removeItemFromCart(int[] itemToRemove) {
+		// index 0 is the product index and index 1 is the quantity to remove
+		if (itemToRemove[0] > 0 && itemToRemove[0] <= OnlineStoreMain.currentOrder.getOrderLines().size()) {
+			// TODO check if any more of media type, if none, remove completely
+			OrderLine productChosen = OnlineStoreMain.currentOrder.getOrderLines().get(itemToRemove[0] - 1);
+			if (itemToRemove[1] >= productChosen.getQuantity()) {
+				OnlineStoreMain.currentOrder.getOrderLines().remove(productChosen);
+				System.out.println(
+						"Removed product " + productChosen.getProduct().getTitle() + " from your cart.");
+			} else {
+				productChosen.setQuantity(productChosen.getQuantity() - itemToRemove[1]);
+				System.out.println("Removed " + itemToRemove + " product(s) " + productChosen.getProduct().getTitle()
+						+ " from your cart.");
+			}
+
 		} else {
 			System.out.println("Invalid option.");
 		}
@@ -38,8 +46,8 @@ public class OrderService {
 
 	public void showItemsInCart() {
 		int i = 1;
-		for (Media item : OnlineStoreMain.currentOrder.getClientCart()) {
-			System.out.println(i + ". " + item.getTitle() + " - " + item.getPrice());
+		for (OrderLine line : OnlineStoreMain.currentOrder.getOrderLines()) {
+			System.out.println(i + ". " + line);
 			i++;
 		}
 	}

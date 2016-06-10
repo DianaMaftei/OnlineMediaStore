@@ -3,8 +3,8 @@ package Service;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import entity.Client;
 import entity.Media;
+import entity.Order;
 
 /**
  *
@@ -34,16 +34,17 @@ public class StoreService {
 		switch (userOption) {
 		case 1:
 			new Login().doLogin();
+			OnlineStoreMain.currentOrder = new Order(Login.getCurrentUser().getName());
 			break;
 		case 2:
 			// register a new user and log them in automatically
 			new Login().loginRegisteredUser(new Register().registerClient());
+			OnlineStoreMain.currentOrder = new Order(Login.getCurrentUser().getName());
 			break;
 		case 3:
-			// create a temp guest account and login with it
-			Client guestUser = new Client("guest", "guest", "0000");
-			Login.setCurrentUser(guestUser);
-			break;
+			OnlineStoreMain.currentOrder = new Order("guest");
+			System.out.println("Welcome guest!");
+			return true;
 		default:
 			System.out.println("Invalid option. Please choose one of the above.");
 			return false;
@@ -77,24 +78,43 @@ public class StoreService {
 		currentProductList = commandOption;
 		switch (commandOption) {
 		case 1:
-			listItemsInStock(OnlineStoreMain.dataFunctionProperties.dvds);
-			orderService.addItem(DataFunctionProperties.dvds, getItemToPurchase());
+			listItemsInStock(DataFunctionProperties.dvds);
+			orderService.addItemToCart(DataFunctionProperties.dvds, getItemToPurchase());
 			break;
 		case 2:
-			listItemsInStock(OnlineStoreMain.dataFunctionProperties.cds);
-			orderService.addItem(DataFunctionProperties.cds, getItemToPurchase());
+			listItemsInStock(DataFunctionProperties.cds);
+			orderService.addItemToCart(DataFunctionProperties.cds, getItemToPurchase());
 			break;
 		case 3:
-			listItemsInStock(OnlineStoreMain.dataFunctionProperties.books);
-			orderService.addItem(DataFunctionProperties.books, getItemToPurchase());
+			listItemsInStock(DataFunctionProperties.books);
+			orderService.addItemToCart(DataFunctionProperties.books, getItemToPurchase());
 			break;
 		case 4:
-			System.out.println("Which item do you want to remove from your cart?");
-			orderService.showItemsInCart();
-			orderService.removeItemFromCart(getUserOption());
+
+			orderService.removeItemFromCart(getItemToRemoveFromCart());
 			break;
 		case 5:
-			orderService.checkOut();
+			if (Login.getCurrentUser() == null) {
+				System.out.println(
+						"You must login or register with a new account in order to complete your purchase. \nDo you want to Login (L), Register (R) or Continue browsing (C)?");
+				String choice = userInput.next();
+				if ("L".equalsIgnoreCase(choice)) {
+					new Login().doLogin();
+				} else if ("R".equalsIgnoreCase(choice)) {
+					new Login().loginRegisteredUser(new Register().registerClient());
+					System.out.println("Welcome " + Login.getCurrentUser().getName() + "!");
+					Order tempOrder = new Order(Login.getCurrentUser().getUserID());
+					tempOrder.setOrderLines(OnlineStoreMain.currentOrder.getOrderLines());
+					OnlineStoreMain.currentOrder = tempOrder;
+					break;
+				} else if ("C".equalsIgnoreCase(choice)) {
+					break;
+				} else {
+					System.out.println("Invalid option.");
+				}
+			} else {
+				orderService.checkOut();
+			}
 			break;
 		default:
 			System.out.println("This is not a valid option.");
@@ -103,9 +123,21 @@ public class StoreService {
 
 	}
 
-	private int getItemToPurchase() {
+	private int[] getItemToPurchase() {
 		System.out.println("Which item would you like to purchase?");
-		return getUserOption();
+		int item = getUserOption();
+		System.out.println("How many items do you wish to purchase?");
+		int quantity = getUserOption();
+		return new int [] {item, quantity};
+	}
+	
+	private int[] getItemToRemoveFromCart(){
+		System.out.println("Which item do you want to remove from your cart?");
+		orderService.showItemsInCart();
+		int item = getUserOption();
+		System.out.println("How many items do you wish to remove?");
+		int quantity = getUserOption();
+		return new int [] {item, quantity};
 	}
 
 	private void listItemsInStock(ArrayList<? extends Media> list) {
