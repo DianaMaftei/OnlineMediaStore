@@ -90,7 +90,10 @@ public class StoreService {
 			orderService.addItemToCart(DataFunctionProperties.books, getItemToPurchase());
 			break;
 		case 4:
-
+			if (OnlineStoreMain.currentOrder.getOrderLines().size() == 0){
+				System.out.println("You haven't purchased anything yet.");
+				return;
+			}
 			orderService.removeItemFromCart(getItemToRemoveFromCart());
 			break;
 		case 5:
@@ -134,7 +137,11 @@ public class StoreService {
 	private int[] getItemToRemoveFromCart(){
 		System.out.println("Which item do you want to remove from your cart?");
 		orderService.showItemsInCart();
+		System.out.println("Press 0 if you've changed your mind.");
 		int item = getUserOption();
+		if(item == 0){
+			return new int []{0, 0};
+		}
 		System.out.println("How many items do you wish to remove?");
 		int quantity = getUserOption();
 		return new int [] {item, quantity};

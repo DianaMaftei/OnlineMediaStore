@@ -26,13 +26,14 @@ public class OrderService {
 
 	public void removeItemFromCart(int[] itemToRemove) {
 		// index 0 is the product index and index 1 is the quantity to remove
+		if(itemToRemove[0] == 0){
+			return;
+		}
 		if (itemToRemove[0] > 0 && itemToRemove[0] <= OnlineStoreMain.currentOrder.getOrderLines().size()) {
-			// TODO check if any more of media type, if none, remove completely
 			OrderLine productChosen = OnlineStoreMain.currentOrder.getOrderLines().get(itemToRemove[0] - 1);
 			if (itemToRemove[1] >= productChosen.getQuantity()) {
 				OnlineStoreMain.currentOrder.getOrderLines().remove(productChosen);
-				System.out.println(
-						"Removed product " + productChosen.getProduct().getTitle() + " from your cart.");
+				System.out.println("Removed product " + productChosen.getProduct().getTitle() + " from your cart.");
 			} else {
 				productChosen.setQuantity(productChosen.getQuantity() - itemToRemove[1]);
 				System.out.println("Removed " + itemToRemove + " product(s) " + productChosen.getProduct().getTitle()
