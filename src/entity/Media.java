@@ -1,18 +1,19 @@
 package entity;
+
 /**
-*
-*@author Diana Maftei
-*/
+ *
+ * @author Diana Maftei
+ */
 public abstract class Media {
 	private String title;
 	private double price;
 	private Genre genre;
 	private String description;
-	
-	public Media(){
-		
+
+	public Media() {
+
 	}
-	
+
 	public Media(String title, double price, Genre genre, String description) {
 		this.title = title;
 		this.price = price;
@@ -56,5 +57,36 @@ public abstract class Media {
 	public String toString() {
 		return "Title: " + title + ", Price: " + price + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(price);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Media))
+			return false;
+		if (((Media) obj).getTitle().equals(this.getTitle())) {
+			if ((((Media) obj).getDescription().equals(this.getDescription()))) {
+				if (((Media) obj).getPrice() == (this.getPrice())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 }

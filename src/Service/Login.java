@@ -32,6 +32,9 @@ public class Login {
 	}
 	
 	private boolean loginUser(String userID, String password) {
+		if("0".equals(userID)){
+			return false;
+		}
 		for (Client user : OnlineStoreMain.getClients()) {
 			if (userID.equalsIgnoreCase(user.getUserID())) {
 				if (password.equalsIgnoreCase(user.getPassword())) {

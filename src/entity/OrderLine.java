@@ -31,4 +31,27 @@ public class OrderLine {
 		return "Product: " + product.getTitle() + ", Quantity: " + quantity + ", Price: " + product.getPrice();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + quantity;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if(((OrderLine)obj).getProduct().equals(this.getProduct())){
+			return true;
+		}
+		return false;
+	}
+
+
+	
 }
