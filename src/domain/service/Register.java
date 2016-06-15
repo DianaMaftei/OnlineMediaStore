@@ -1,5 +1,9 @@
 package domain.service;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +26,31 @@ public class Register {
 		getRegisterInfo();
 		Client newClient = new Client(fullName, userID, password);
 		OnlineStoreMain.getClients().add(newClient);
+		updateDatabaseWithNewUser();
 		return newClient;
+	}
+
+	private void updateDatabaseWithNewUser() {
+
+		Properties properties = OnlineStoreMain.clientsProperties;
+		int currentClientIndex = new ClientDAO(properties).getNumberOfClients();
+		try {
+			properties.load(OnlineStoreMain.clientsDatabase);
+			OnlineStoreMain.clientsDatabase.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		properties.setProperty(String.format("client%d.name", currentClientIndex), fullName);
+		properties.setProperty(String.format("client%d.userID", currentClientIndex), userID);
+		properties.setProperty(String.format("client%d.password", currentClientIndex), password);
+		try {
+			properties.store(new FileOutputStream("clientsDatabase"), null);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void getRegisterInfo() {
@@ -34,7 +62,8 @@ public class Register {
 		do {
 			userID = userInput.next();
 		} while (doesUserExist(userID) || !isUserIDValid(userID));
-		System.out.println("Choose a password. It must include at least one uppercase letter, a lowercase letter, a number and it must be between 6 and 10 characters long.");
+		System.out.println(
+				"Choose a password. It must include at least one uppercase letter, a lowercase letter, a number and it must be between 6 and 10 characters long.");
 		do {
 			password = userInput.next();
 		} while (!isPasswordValid(password));
@@ -51,7 +80,7 @@ public class Register {
 	}
 
 	private boolean isUserNameValid(String name) {
-		//with RegEx
+		// with RegEx
 		String pattern = "[A-z ,.'-]+";
 		// Create a Pattern object
 		pr = Pattern.compile(pattern);
@@ -65,7 +94,7 @@ public class Register {
 	}
 
 	private boolean isUserIDValid(String userID) {
-		//with RegEx
+		// with RegEx
 		String pattern = "\\w+";
 		pr = Pattern.compile(pattern);
 		m = pr.matcher(userID);
@@ -76,9 +105,9 @@ public class Register {
 			return false;
 		}
 	}
-	
-	private boolean isPasswordValid(String password){
-		//with RegEx
+
+	private boolean isPasswordValid(String password) {
+		// with RegEx
 		String pattern = "^(?=\\w*\\d)(?=\\w*[a-z])(?=\\w*[A-Z])\\w{6,10}$";
 		pr = Pattern.compile(pattern);
 		m = pr.matcher(password);

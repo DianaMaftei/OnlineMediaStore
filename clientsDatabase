@@ -1,0 +1,19 @@
+client1.name = Maftei Diana
+client1.userID = dianaM
+client1.password = 0000
+
+client2.name = Stefanescu Anca
+client2.userID = ancaS
+client2.password = 1111
+
+client3.name = Georgescu Cristina
+client3.userID = cristinaG
+client3.password = 2222
+
+client4.name = Atanasei Ion
+client4.userID = ionA
+client4.password = 3333
+
+client5.name = Dumitras Sebi
+client5.userID = sebiD
+client5.password = 4444
