@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import domain.entities.Order;
 import domain.entities.Product;
-import productDAO.DAO;
+import productDAO.ProductDAO;
 
 /**
  *
@@ -34,6 +34,8 @@ public class StoreService {
 		System.out.println("Welcome to our online store!");
 		System.out.println("Would you like to: \n" + "\t1. Login\n" + "\t2. Register\n" + "\t3. Continue as guest");
 	}
+	
+	//TODO be able to return from login in case user changes their mind
 
 	private boolean selectLoginOption(int userOption) {
 		switch (userOption) {
@@ -83,16 +85,16 @@ public class StoreService {
 		currentProductList = commandOption;
 		switch (commandOption) {
 		case 1:
-			listItemsInStock(DAO.dvds);
-			orderService.addItemToCart(DAO.dvds, getItemToPurchase());
+			listItemsInStock(OnlineStoreMain.dvds);
+			orderService.addItemToCart(OnlineStoreMain.dvds, getItemToPurchase());
 			break;
 		case 2:
-			listItemsInStock(DAO.cds);
-			orderService.addItemToCart(DAO.cds, getItemToPurchase());
+			listItemsInStock(OnlineStoreMain.cds);
+			orderService.addItemToCart(OnlineStoreMain.cds, getItemToPurchase());
 			break;
 		case 3:
-			listItemsInStock(DAO.books);
-			orderService.addItemToCart(DAO.books, getItemToPurchase());
+			listItemsInStock(OnlineStoreMain.books);
+			orderService.addItemToCart(OnlineStoreMain.books, getItemToPurchase());
 			break;
 		case 4:
 			if (OnlineStoreMain.currentOrder.getOrderLines().size() == 0){

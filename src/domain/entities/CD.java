@@ -4,12 +4,12 @@ import java.util.ArrayList;
 *
 *@author diana.maftei[at]gmail.com
 */
-public class CDProduct extends Product implements IPlayable{
+public class CD extends Product implements IPlayable{
 	
 	private String artist;
 	private ArrayList<Track> trackList;
 
-	public CDProduct() {
+	public CD() {
 		super();
 	}
 

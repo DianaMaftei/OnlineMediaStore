@@ -1,0 +1,89 @@
+DVD1.title = Game of Thrones
+DVD1.price = 12.33
+DVD1.genre = SERIES
+DVD1.description = Dragons, nudidy and violence
+DVD1.seasonNo = 3
+DVD1.director = David Benioff
+
+
+DVD2.title = Adventure Time
+DVD2.price = 7.99
+DVD2.genre = CHILDRENS_SERIES
+DVD2.description = American animated television series created by Pendlton Ward for Cartoon Network
+DVD2.seasonNo = 2
+DVD2.director = Patrick McHale
+
+DVD3.title = Supernatural
+DVD3.price = 9.99
+DVD3.genre = SERIES
+DVDd3.description = American tv series about two brothers fighting super-natural creatures
+DVD3.seasonNo = 10
+DVD3.director = Eric Kripke
+
+DVD4.title = The Grudge
+DVD4.price = 9.74
+DVD4.genre = HORROR
+DVD4.description = A Japanese spirit tries to possess people
+DVD4.seasonNo = 0
+DVD4.director = Takashi Shimizu
+
+CD1.title = TRalala
+CD1.price = 3.50
+CD1.genre = POP
+CD1.description = Hippy Hippy Shake
+CD1.artist = SomeoneBand
+CD1.tracks = Yip Yip:212/TumTum:265/DrumbaDrumba:192/Vrooom:318
+
+CD2.title = Blood And Guts
+CD2.price = 8.99
+CD2.genre = METAL
+CD2.description = Bloood, more blood, guuuts, ALL the guts
+CD2.artist = The Lambs
+CD2.tracks = Die:258/Screeeeeam:311/BoogaBoo, Hoo, Hoo:273/Eternal Sleep:329
+
+CD3.title = Purple Cows
+CD3.price = 5.99
+CD3.genre = HIP_HOP
+CD3.description = A soulful rendition of one's inner fears while high
+CD3.artist = Big Lenny
+CD3.tracks = Dem Cows:302/Dem Purple, Purple Cows:285/Dreamer:234/S'all good:197
+
+CD4.title = Sweet Home Alberta
+CD4.price = 4.50
+CD4.genre = COUNTRY
+CD4.description = Someone's missing one's momma
+CD4.artist = Blaine Dale
+CD4.tracks = Hat in the breeze:257/Rolling hills:296/Come home to momma:194
+
+
+Book1.title = HitchHiker's Guide to the Galaxy
+Book1.price = 19.99
+Book1.genre = SCI_FI
+Book1.description = Whatever you do, don't panic
+Book1.authors = Douglas Adams/
+Book1.noOfPages = 856
+Book1.publishingHouse = Ursa Minor
+
+Book2.title = The Feasting Games
+Book2.price = 15.50
+Book2.genre = HISTORICAL
+Book2.description = Those were the best of times, those were the worst of times
+Book2.authors = That one guy/That other guy/
+Book2.noOfPages = 248
+Book2.publishingHouse = PareHour
+
+Book3.title = The Great White Lizard-thingy
+Book3.price = 8.99
+Book3.genre = NON_FICTION
+Book3.description = A look at one of the most fascinating creatures on Earth
+Book3.authors = Bob Brown/Ben Black/Gabe Green/Will White/
+Book3.noOfPages = 552
+Book3.publishingHouse = LakeView 
+
+Book4.title = Flaming Heart
+Book4.price = 2.99
+Book4.genre = ROMANCE
+Book4.description = A stormy night, a pair of newly-weds, a past flame resurfaces (from the ground)
+Book4.authors = Tina Belcher/
+Book4.noOfPages = 1319
+Book4.publishingHouse = Bob's

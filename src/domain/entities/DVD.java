@@ -3,12 +3,12 @@ package domain.entities;
 *
 *@author diana.maftei[at]gmail.com
 */
-public class DVDProduct extends Product implements IPlayable{
+public class DVD extends Product implements IPlayable{
 	
 	private String seasonNo;
 	private String director;
 	
-	public DVDProduct(){
+	public DVD(){
 		super();
 	}
 
