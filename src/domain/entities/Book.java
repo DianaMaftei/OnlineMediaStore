@@ -1,16 +1,16 @@
-package entity;
+package domain.entities;
 import java.util.ArrayList;
 /**
 *
-*@author Diana Maftei
+*@author diana.maftei[at]gmail.com
 */
-public class BookProduct extends Media{
+public class Book extends Product{
 	
 	private ArrayList<String> authors;
 	private int noOfPages;
 	private String publishingHouse;
 	
-	public BookProduct() {
+	public Book() {
 		super();
 	}
 	
@@ -40,7 +40,7 @@ public class BookProduct extends Media{
 
 	@Override
 	public String toString() {
-		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nAuthors: " + getAuthors() + "\nNumber of Pages: " + noOfPages + "\nPublishing House: " + publishingHouse + "\n";
+		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nAuthors: " + authors + "\nNumber of Pages: " + noOfPages + "\nPublishing House: " + publishingHouse + "\n";
 	}
 
 	

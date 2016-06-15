@@ -1,20 +1,20 @@
-package entity;
+package domain.entities;
 
 /**
  *
- * @author Diana Maftei
+ * @author diana.maftei[at]gmail.com
  */
-public abstract class Media {
+public abstract class Product {
 	private String title;
 	private double price;
 	private Genre genre;
 	private String description;
 
-	public Media() {
+	public Product() {
 
 	}
 
-	public Media(String title, double price, Genre genre, String description) {
+	public Product(String title, double price, Genre genre, String description) {
 		this.title = title;
 		this.price = price;
 		this.genre = genre;
@@ -77,11 +77,11 @@ public abstract class Media {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Media))
+		if (!(obj instanceof Product))
 			return false;
-		if (((Media) obj).getTitle().equals(this.getTitle())) {
-			if ((((Media) obj).getDescription().equals(this.getDescription()))) {
-				if (((Media) obj).getPrice() == (this.getPrice())) {
+		if (((Product) obj).getTitle().equals(this.getTitle())) {
+			if ((((Product) obj).getDescription().equals(this.getDescription()))) {
+				if (((Product) obj).getPrice() == (this.getPrice())) {
 					return true;
 				}
 			}

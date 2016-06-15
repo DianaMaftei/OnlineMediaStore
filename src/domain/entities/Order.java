@@ -1,11 +1,11 @@
-package entity;
+package domain.entities;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
  *
- * @author Diana Maftei
+ * @author diana.maftei[at]gmail.com
  */
 public class Order {
 	private String clientName;

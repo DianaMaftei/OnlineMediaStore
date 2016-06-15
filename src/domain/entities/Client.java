@@ -1,9 +1,9 @@
-package entity;
+package domain.entities;
 
 import java.util.ArrayList;
 /**
 *
-*@author Diana Maftei
+*@author diana.maftei[at]gmail.com
 */
 public class Client {
 	private String name;

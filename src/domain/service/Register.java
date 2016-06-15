@@ -1,14 +1,14 @@
-package Service;
+package domain.service;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import entity.Client;
+import domain.entities.Client;
 
 /**
  *
- * @author Diana Maftei
+ * @author diana.maftei[at]gmail.com
  */
 public class Register {
 	private Scanner userInput = new Scanner(System.in);
@@ -29,7 +29,7 @@ public class Register {
 		System.out.println("Type your full name. Only letters, periods, hyphens, commas and apostrophes are allowed.");
 		do {
 			fullName = userInput.nextLine();
-		} while (!isNameValid(fullName));
+		} while (!isUserNameValid(fullName));
 		System.out.println("Choose a one-word userID. Only letters, numbers and underscores are allowed.");
 		do {
 			userID = userInput.next();
@@ -50,7 +50,8 @@ public class Register {
 		return false;
 	}
 
-	private boolean isNameValid(String name) {
+	private boolean isUserNameValid(String name) {
+		//with RegEx
 		String pattern = "[A-z ,.'-]+";
 		// Create a Pattern object
 		pr = Pattern.compile(pattern);
@@ -64,6 +65,7 @@ public class Register {
 	}
 
 	private boolean isUserIDValid(String userID) {
+		//with RegEx
 		String pattern = "\\w+";
 		pr = Pattern.compile(pattern);
 		m = pr.matcher(userID);
@@ -76,6 +78,7 @@ public class Register {
 	}
 	
 	private boolean isPasswordValid(String password){
+		//with RegEx
 		String pattern = "^(?=\\w*\\d)(?=\\w*[a-z])(?=\\w*[A-Z])\\w{6,10}$";
 		pr = Pattern.compile(pattern);
 		m = pr.matcher(password);

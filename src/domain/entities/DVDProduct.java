@@ -1,9 +1,9 @@
-package entity;
+package domain.entities;
 /**
 *
-*@author Diana Maftei
+*@author diana.maftei[at]gmail.com
 */
-public class DVDProduct extends Media implements IPlayable{
+public class DVDProduct extends Product implements IPlayable{
 	
 	private String seasonNo;
 	private String director;

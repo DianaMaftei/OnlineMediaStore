@@ -1,11 +1,11 @@
-package Service;
+package domain.service;
 
 import java.util.Scanner;
 
-import entity.Client;
+import domain.entities.Client;
 /**
 *
-*@author Diana Maftei
+*@author diana.maftei[at]gmail.com
 */
 public class Login {
 	private Scanner userInput = new Scanner(System.in);

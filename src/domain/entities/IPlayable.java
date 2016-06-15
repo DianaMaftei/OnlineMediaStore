@@ -1,7 +1,7 @@
-package entity;
+package domain.entities;
 /**
 *
-*@author Diana Maftei
+*@author diana.maftei[at]gmail.com
 */
 
 public interface IPlayable {

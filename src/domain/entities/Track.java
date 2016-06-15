@@ -1,7 +1,8 @@
-package entity;
+package domain.entities;
+
 /**
 *
-*@author Diana Maftei
+*@author diana.maftei[at]gmail.com
 */
 public class Track implements IPlayable{
 	String title;

@@ -1,10 +1,10 @@
-package entity;
+package domain.entities;
 import java.util.ArrayList;
 /**
 *
-*@author Diana Maftei
+*@author diana.maftei[at]gmail.com
 */
-public class CDProduct extends Media implements IPlayable{
+public class CDProduct extends Product implements IPlayable{
 	
 	private String artist;
 	private ArrayList<Track> trackList;

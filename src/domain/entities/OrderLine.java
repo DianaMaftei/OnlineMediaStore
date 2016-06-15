@@ -1,10 +1,13 @@
-package entity;
-
+package domain.entities;
+/**
+*
+*@author diana.maftei[at]gmail.com
+*/
 public class OrderLine {
-	private Media product;
+	private Product product;
 	private int quantity;
 
-	public OrderLine(Media product, int quantity) {
+	public OrderLine(Product product, int quantity) {
 		super();
 		this.product = product;
 		this.quantity = quantity;
@@ -14,7 +17,7 @@ public class OrderLine {
 		return product.getPrice() * quantity;
 	}
 
-	public Media getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 

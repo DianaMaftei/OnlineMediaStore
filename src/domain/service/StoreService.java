@@ -1,19 +1,24 @@
-package Service;
+package domain.service;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import entity.Media;
-import entity.Order;
+import domain.entities.Order;
+import domain.entities.Product;
+import productDAO.DAO;
 
 /**
  *
- * @author Diana Maftei
+ * @author diana.maftei[at]gmail.com
  */
 public class StoreService {
 	public static int currentProductList;
 	private static Scanner userInput = new Scanner(System.in);
 	private static OrderService orderService = new OrderService();
+	
+	
+	//TODO - keep logic, but move user interaction to ClientMenu - all display and all getInputs
+	
 
 	private int getUserOption() {
 		try {
@@ -55,7 +60,6 @@ public class StoreService {
 
 	public void doLogin() {
 		boolean loggedIn;
-		;
 		do {
 			displayLoginMenu();
 			int currentUserOption = getUserOption();
@@ -63,7 +67,7 @@ public class StoreService {
 		} while (!loggedIn);
 	}
 
-	public void itemsMenu() {
+	public void doStoreService() {
 		showProductsMenu();
 		int commandOption = getUserOption();
 		doUserCommand(commandOption);
@@ -74,20 +78,21 @@ public class StoreService {
 				"1. Buy a DVD. \n" + "2. Buy a CD.\n" + "3. Buy a book.\n4. Remove item from cart. \n5. Checkout.");
 	}
 
+	//TODO eliminate the switch - find a better solution - OOP
 	private void doUserCommand(int commandOption) {
 		currentProductList = commandOption;
 		switch (commandOption) {
 		case 1:
-			listItemsInStock(DataFunctionProperties.dvds);
-			orderService.addItemToCart(DataFunctionProperties.dvds, getItemToPurchase());
+			listItemsInStock(DAO.dvds);
+			orderService.addItemToCart(DAO.dvds, getItemToPurchase());
 			break;
 		case 2:
-			listItemsInStock(DataFunctionProperties.cds);
-			orderService.addItemToCart(DataFunctionProperties.cds, getItemToPurchase());
+			listItemsInStock(DAO.cds);
+			orderService.addItemToCart(DAO.cds, getItemToPurchase());
 			break;
 		case 3:
-			listItemsInStock(DataFunctionProperties.books);
-			orderService.addItemToCart(DataFunctionProperties.books, getItemToPurchase());
+			listItemsInStock(DAO.books);
+			orderService.addItemToCart(DAO.books, getItemToPurchase());
 			break;
 		case 4:
 			if (OnlineStoreMain.currentOrder.getOrderLines().size() == 0){
@@ -146,6 +151,8 @@ public class StoreService {
 		return new int [] {item, quantity};
 	}
 	
+	//TODO find a better solution - this is BAD
+	
 	private int[] getItemToRemoveFromCart(){
 		System.out.println("Which item do you want to remove from your cart?");
 		orderService.showItemsInCart();
@@ -159,9 +166,9 @@ public class StoreService {
 		return new int [] {item, quantity};
 	}
 
-	private void listItemsInStock(ArrayList<? extends Media> list) {
+	private void listItemsInStock(ArrayList<? extends Product> list) {
 		int index = 1;
-		for (Media item : list) {
+		for (Product item : list) {
 			System.out.println(index);
 			System.out.println(item);
 			index++;

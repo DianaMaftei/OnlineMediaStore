@@ -1,25 +1,29 @@
-package Service;
+package productDAO;
 
 import java.util.ArrayList;
 import java.util.Properties;
-import entity.BookProduct;
-import entity.CDProduct;
-import entity.DVDProduct;
-import entity.Genre;
-import entity.Track;
+
+import domain.entities.Book;
+import domain.entities.CDProduct;
+import domain.entities.DVDProduct;
+import domain.entities.Genre;
+import domain.entities.Track;
 /**
 *
-*@author Diana Maftei
+*@author diana.maftei[at]gmail.com
 */
-public class DataFunctionProperties {
+public class DAO {
+	
+	//TODO separate into DAOs for each product OR generalized way to get each!!!
+	//TODO fillCommonFields
 	
 	public static ArrayList<DVDProduct> dvds = new ArrayList<>();
 	public static ArrayList<CDProduct> cds = new ArrayList<>();
-	public static ArrayList<BookProduct> books = new ArrayList<>();
+	public static ArrayList<Book> books = new ArrayList<>();
 
 	Properties properties;
 
-	public DataFunctionProperties(Properties properties) {
+	public DAO(Properties properties) {
 		this.properties = properties;
 	}
 
@@ -102,7 +106,7 @@ public class DataFunctionProperties {
 			String noOfPages = properties.getProperty("book" + idx + ".noOfPages");
 			String publishingHouse = properties.getProperty("book" + idx + ".publishingHouse");
 
-			BookProduct book = new BookProduct();
+			Book book = new Book();
 			book.setTitle(title);
 			book.setPrice(Double.valueOf(price));
 			book.setGenre(Genre.valueOf(genre));
