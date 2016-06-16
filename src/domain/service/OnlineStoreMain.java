@@ -47,7 +47,12 @@ public class OnlineStoreMain {
 	private static void loadDatabaseOfClients() throws Exception {
 		// read from file the database of existing clients
 		clientsDatabase = new FileInputStream("clientsDatabase");
-		clientsProperties = new Properties();
+		clientsProperties = new Properties(){
+		    @Override
+		    public synchronized java.util.Enumeration<Object> keys() {
+		        return java.util.Collections.enumeration(new java.util.TreeSet<Object>(super.keySet()));
+		    }
+		};
 		clientsProperties.load(clientsDatabase);
 		clients = new ClientDAO(clientsProperties).getClients();
 	}
