@@ -20,22 +20,25 @@ public class Login {
 	public void doLogin() {
 		boolean loggedIn;
 		do {
-			displayLoginMenu();
+			getUserInfo();
+			if ("0".equals(userID)){
+				return;
+			}
 			loggedIn = loginUser(userID, password);
 		} while (!loggedIn);
 	}
 	
-	private void displayLoginMenu() {
-		System.out.println("Type your userID and password to login.");
+	private void getUserInfo() {
+		System.out.println("Type your userID and password to login. \nType 0 to return to the previous menu.");
 		userID = userInput.next();
+		if ("0".equals(userID)){
+			return;
+		}
 		password = userInput.next();
 	}
 	
 	private boolean loginUser(String userID, String password) {
-		if("0".equals(userID)){
-			return false;
-		}
-		for (Customer user : OnlineStoreMain.getClients()) {
+		for (Customer user : OnlineStoreMain.getCustomers()) {
 			if (userID.equalsIgnoreCase(user.getUserID())) {
 				if (password.equalsIgnoreCase(user.getPassword())) {
 					System.out.println("You've successfully logged in!");

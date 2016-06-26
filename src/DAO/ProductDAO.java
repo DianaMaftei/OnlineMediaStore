@@ -3,6 +3,8 @@ package DAO;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,7 +19,7 @@ public abstract class ProductDAO<T extends Product> {
 
 	// TODO find a generalized way to get rid of separate DAOs
 
-	Properties productsProperties = new Properties();;
+	Properties productsProperties = new Properties();
 
 	public ProductDAO() {
 		InputStream productsDatabase;
@@ -66,5 +68,40 @@ public abstract class ProductDAO<T extends Product> {
 		product.setGenre(Genre.valueOf(readMediaAttribute("genre", indexInPropertiesFile)));
 		product.setDescription(readMediaAttribute("description", indexInPropertiesFile));
 	}
+
+	
+	
+	public static void listItemsInStock(ArrayList<? extends Product> list) {
+		int index = 1;
+		for (Product item : list) {
+			System.out.println(index);
+			System.out.println(item);
+			index++;
+		}
+	}
+	
+
+	public static ArrayList<? extends Product> sortByTitle(ArrayList<? extends Product> list) {
+		Collections.sort(list, new Comparator<Product>() {
+			@Override
+			public int compare(Product o1, Product o2) {
+				return o1.getTitle().compareTo(o2.getTitle());
+			}
+		});
+		return list;
+	}
+
+	public static ArrayList<? extends Product> sortByPrice(ArrayList<? extends Product> list) {
+		Collections.sort(list, new Comparator<Product>() {
+			@Override
+			public int compare(Product o1, Product o2) {
+				return (int) (o1.getPrice() - o2.getPrice());
+			}
+		});
+		return list;
+	}
+
+	
+
 
 }

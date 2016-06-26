@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import DAO.ClientDAO;
+import DAO.CustomerDAO;
 import domain.entities.Customer;
 
 /**
@@ -23,30 +23,32 @@ public class Register {
 	private Pattern pr;
 	private Matcher m;
 
-	public Customer registerClient() {
+	public Customer registerCustomer() {
 		getRegisterInfo();
-		Customer newClient = new Customer(fullName, userID, password);
-		OnlineStoreMain.getClients().add(newClient);
+		if ("0".equals(fullName)) {
+			return null;
+		}
+		Customer newCustomer = new Customer(fullName, userID, password);
+		OnlineStoreMain.getCustomers().add(newCustomer);
 		updateDatabaseWithNewUser();
-		return newClient;
+		return newCustomer;
 	}
 
 	private void updateDatabaseWithNewUser() {
-
-		Properties properties = OnlineStoreMain.clientsProperties;
-		int currentClientIndex = new ClientDAO(properties).getNumberOfClients();
+		CustomerDAO customerDAO = new CustomerDAO();
+		Properties properties = customerDAO.customersProperties;
+		int currentCustomerIndex = customerDAO.getNumberOfCustomers();
 		try {
-			properties.load(OnlineStoreMain.clientsDatabase);
-			OnlineStoreMain.clientsDatabase.close();
+			properties.load(customerDAO.customersDatabase);
+			customerDAO.customersDatabase.close();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-
-		properties.setProperty(String.format("client%d.name", currentClientIndex), fullName);
-		properties.setProperty(String.format("client%d.userID", currentClientIndex), userID);
-		properties.setProperty(String.format("client%d.password", currentClientIndex), password);
+		properties.setProperty(String.format("customer%d.name", currentCustomerIndex), fullName);
+		properties.setProperty(String.format("customer%d.userID", currentCustomerIndex), userID);
+		properties.setProperty(String.format("customer%d.password", currentCustomerIndex), password);
 		try {
-			properties.store(new FileOutputStream("clientsDatabase"), null);
+			properties.store(new FileOutputStream("customersDatabase"), null);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -55,9 +57,13 @@ public class Register {
 	}
 
 	private void getRegisterInfo() {
-		System.out.println("Type your full name. Only letters, periods, hyphens, commas and apostrophes are allowed.");
+		System.out.println(
+				"Type your full name. Only letters, periods, hyphens, commas and apostrophes are allowed. \nType 0 to return to the previous menu.");
 		do {
 			fullName = userInput.nextLine();
+			if ("0".equals(fullName)) {
+				return;
+			}
 		} while (!isUserNameValid(fullName));
 		System.out.println("Choose a one-word userID. Only letters, numbers and underscores are allowed.");
 		do {
@@ -71,8 +77,8 @@ public class Register {
 	}
 
 	private boolean doesUserExist(String userID) {
-		for (Customer user : OnlineStoreMain.getClients()) {
-			if (userID.equalsIgnoreCase(user.getUserID())) {
+		for (Customer customer : OnlineStoreMain.getCustomers()) {
+			if (userID.equalsIgnoreCase(customer.getUserID())) {
 				System.out.println("This userID already exists. Please choose another.");
 				return true;
 			}
