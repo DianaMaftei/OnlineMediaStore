@@ -8,7 +8,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import domain.entities.Client;
+import DAO.ClientDAO;
+import domain.entities.Customer;
 
 /**
  *
@@ -22,9 +23,9 @@ public class Register {
 	private Pattern pr;
 	private Matcher m;
 
-	public Client registerClient() {
+	public Customer registerClient() {
 		getRegisterInfo();
-		Client newClient = new Client(fullName, userID, password);
+		Customer newClient = new Customer(fullName, userID, password);
 		OnlineStoreMain.getClients().add(newClient);
 		updateDatabaseWithNewUser();
 		return newClient;
@@ -70,7 +71,7 @@ public class Register {
 	}
 
 	private boolean doesUserExist(String userID) {
-		for (Client user : OnlineStoreMain.getClients()) {
+		for (Customer user : OnlineStoreMain.getClients()) {
 			if (userID.equalsIgnoreCase(user.getUserID())) {
 				System.out.println("This userID already exists. Please choose another.");
 				return true;

@@ -5,30 +5,31 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import DAO.BookDAO;
+import DAO.CdDAO;
+import DAO.ClientDAO;
+import DAO.DvdDAO;
+import DAO.ProductDAO;
 import domain.entities.Book;
 import domain.entities.CD;
-import domain.entities.Client;
+import domain.entities.Customer;
 import domain.entities.DVD;
-import domain.entities.Order;
-import productDAO.BookDAO;
-import productDAO.CdDAO;
-import productDAO.DvdDAO;
-import productDAO.ProductDAO;
+import domain.entities.ShoppingCart;
 
 /**
  *
  * @author diana.maftei[at]gmail.com
  */
 public class OnlineStoreMain {
-	public static Order currentOrder;
+	public static ShoppingCart currentOrder;
 	public static InputStream clientsDatabase;
 	public static Properties clientsProperties;
-	private static ArrayList<Client> clients;
+	private static ArrayList<Customer> clients;
 	public static ArrayList<DVD> dvds = new ArrayList<>();
 	public static ArrayList<CD> cds = new ArrayList<>();
 	public static ArrayList<Book> books = new ArrayList<>();
 
-	public static ArrayList<Client> getClients() {
+	public static ArrayList<Customer> getClients() {
 		return clients;
 	}
 
@@ -60,9 +61,9 @@ public class OnlineStoreMain {
 	private static void loadDatabaseOfProducts() throws Exception {
 		// read from file the products
 		
-		ProductDAO cdDAO = new CdDAO();
-		ProductDAO dvdDAO = new DvdDAO();
-		ProductDAO bookDAO = new BookDAO();
+		ProductDAO<CD> cdDAO = new CdDAO();
+		ProductDAO<DVD> dvdDAO = new DvdDAO();
+		ProductDAO<Book> bookDAO = new BookDAO();
 		
 		cds = (ArrayList<CD>) cdDAO.getAllMedia();
 		dvds = (ArrayList<DVD>) dvdDAO.getAllMedia();

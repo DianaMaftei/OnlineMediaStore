@@ -1,4 +1,4 @@
-package productDAO;
+package DAO;
 
 import java.util.ArrayList;
 

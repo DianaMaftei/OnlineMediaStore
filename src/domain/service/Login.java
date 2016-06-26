@@ -2,7 +2,7 @@ package domain.service;
 
 import java.util.Scanner;
 
-import domain.entities.Client;
+import domain.entities.Customer;
 /**
 *
 *@author diana.maftei[at]gmail.com
@@ -11,9 +11,9 @@ public class Login {
 	private Scanner userInput = new Scanner(System.in);
 	private String userID;
 	private String password;
-	private static Client currentUser;
+	private static Customer currentUser;
 
-	public static Client getCurrentUser() {
+	public static Customer getCurrentUser() {
 		return currentUser;
 	}
 
@@ -35,7 +35,7 @@ public class Login {
 		if("0".equals(userID)){
 			return false;
 		}
-		for (Client user : OnlineStoreMain.getClients()) {
+		for (Customer user : OnlineStoreMain.getClients()) {
 			if (userID.equalsIgnoreCase(user.getUserID())) {
 				if (password.equalsIgnoreCase(user.getPassword())) {
 					System.out.println("You've successfully logged in!");
@@ -50,7 +50,7 @@ public class Login {
 		return false;
 	}
 
-	public void loginRegisteredUser(Client newClient) {
+	public void loginRegisteredUser(Customer newClient) {
 		currentUser = newClient;
 	}
 

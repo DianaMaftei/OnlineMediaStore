@@ -5,13 +5,13 @@ import java.util.ArrayList;
 *
 *@author diana.maftei[at]gmail.com
 */
-public class Client {
+public class Customer {
 	private String name;
 	private String userID;
 	private String password;
-	private ArrayList<Order> clientOrders;
+	private ArrayList<ShoppingCart> clientOrders;
 	
-	public Client(String name, String userID, String password) {
+	public Customer(String name, String userID, String password) {
 		this.name = name;
 		this.userID = userID;
 		this.password = password;
@@ -29,7 +29,7 @@ public class Client {
 		return userID;
 	}
 	
-	public ArrayList<Order> getClientOrders() {
+	public ArrayList<ShoppingCart> getClientOrders() {
 		return clientOrders;
 	}
 

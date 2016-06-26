@@ -3,11 +3,11 @@ package domain.entities;
 *
 *@author diana.maftei[at]gmail.com
 */
-public class OrderLine {
+public class CartItem {
 	private Product product;
 	private int quantity;
 
-	public OrderLine(Product product, int quantity) {
+	public CartItem(Product product, int quantity) {
 		super();
 		this.product = product;
 		this.quantity = quantity;
@@ -31,7 +31,7 @@ public class OrderLine {
 
 	@Override
 	public String toString() {
-		return "Product: " + product.getTitle() + ", Quantity: " + quantity + ", Price: " + product.getPrice();
+		return "Product: " + product.getTitle() + ", Quantity: " + quantity + ", Price: $" + product.getPrice() + " per item";
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class OrderLine {
 			return true;
 		if (obj == null)
 			return false;
-		if(((OrderLine)obj).getProduct().equals(this.getProduct())){
+		if(((CartItem)obj).getProduct().equals(this.getProduct())){
 			return true;
 		}
 		return false;

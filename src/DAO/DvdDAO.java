@@ -1,4 +1,4 @@
-package productDAO;
+package DAO;
 
 import domain.entities.DVD;
 

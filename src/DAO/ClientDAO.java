@@ -1,9 +1,9 @@
-package domain.service;
+package DAO;
 
 import java.util.ArrayList;
 import java.util.Properties;
 
-import domain.entities.Client;
+import domain.entities.Customer;
 
 /**
  *
@@ -28,13 +28,13 @@ public class ClientDAO {
 		}
 	}
 
-	public ArrayList<Client> getClients() {
-		ArrayList<Client> clientList = new ArrayList<>();
+	public ArrayList<Customer> getClients() {
+		ArrayList<Customer> clientList = new ArrayList<>();
 		for (int i = 1; i < getNumberOfClients(); i++) {
 			String name = properties.getProperty("client" + i + ".name");
 			String userID = properties.getProperty("client" + i + ".userID");
 			String password = properties.getProperty("client" + i + ".password");
-			Client client = new Client(name, userID, password);
+			Customer client = new Customer(name, userID, password);
 			clientList.add(client);
 		}
 		return clientList;

@@ -7,23 +7,23 @@ import java.util.Date;
  *
  * @author diana.maftei[at]gmail.com
  */
-public class Order {
+public class ShoppingCart {
 	private String clientName;
 	private Date issueDate;
-	private ArrayList<OrderLine> orderLines;
+	private ArrayList<CartItem> orderLines;
 
-	public ArrayList<OrderLine> getOrderLines() {
+	public ArrayList<CartItem> getOrderLines() {
 		return orderLines;
 	}
 
-	public void setOrderLines(ArrayList<OrderLine> orderLines) {
+	public void setOrderLines(ArrayList<CartItem> orderLines) {
 		this.orderLines = orderLines;
 	}
 
-	public Order(String clientName) {
+	public ShoppingCart(String clientName) {
 		this.clientName = clientName;
 		this.issueDate = new Date();
-		this.orderLines = new ArrayList<OrderLine>();
+		this.orderLines = new ArrayList<CartItem>();
 	}
 
 	public String getClientName() {
@@ -32,7 +32,7 @@ public class Order {
 
 	public double getTotalCost() {
 		double totalCost = 0;
-		for (OrderLine line : orderLines) {
+		for (CartItem line : orderLines) {
 			totalCost += line.getPrice();
 		}
 		return totalCost;

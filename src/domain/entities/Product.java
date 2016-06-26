@@ -55,7 +55,7 @@ public abstract class Product {
 
 	@Override
 	public String toString() {
-		return "Title: " + title + ", Price: " + price + "]";
+		return "Title: " + title + ", Price: " + price;
 	}
 
 	@Override
@@ -88,5 +88,6 @@ public abstract class Product {
 		}
 		return false;
 	}
+
 
 }
