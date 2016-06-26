@@ -33,7 +33,7 @@ public class StoreService {
 				return Integer.parseInt(digits);
 			}
 		}
-		System.out.println("Please enter a number.");
+		System.out.println("Invalid number.");
 		return -1;
 	}
 
@@ -83,32 +83,21 @@ public class StoreService {
 	}
 
 	private void showProductsMenu() {
-		System.out.println(
-				"1. Buy a DVD. \n" + "2. Buy a CD.\n" + "3. Buy a book.\n4. Remove item from cart. \n5. Checkout.");
+		System.out.println("\t1. View DVD library. \n\t" + "2. View CD library.\n"
+				+ "\t3. View book library.\n\t4. Remove item from cart. \n\t5. Checkout.");
 	}
 
-	private void sortItems(ArrayList<Product> list) {
-		System.out.println("Do you want to sort by title or by price?" + "\n \t 1. By title" + "\n \t By price");
-		int sortOption = getUserOption();
-		if (sortOption == 1) {
-			sortByTitle(list);
-		} else if (sortOption == 2) {
-			sortByPrice(list);
-		}
-
-	}
-
-	private void sortByTitle(ArrayList<Product> list) {
+	private ArrayList<? extends Product> sortByTitle(ArrayList<? extends Product> list) {
 		Collections.sort(list, new Comparator<Product>() {
 			@Override
 			public int compare(Product o1, Product o2) {
 				return o1.getTitle().compareTo(o2.getTitle());
 			}
-
 		});
+		return list;
 	}
 
-	private void sortByPrice(ArrayList<Product> list) {
+	private ArrayList<? extends Product> sortByPrice(ArrayList<? extends Product> list) {
 		Collections.sort(list, new Comparator<Product>() {
 			@Override
 			public int compare(Product o1, Product o2) {
@@ -116,6 +105,7 @@ public class StoreService {
 			}
 
 		});
+		return list;
 	}
 
 	// TODO eliminate the switch - find a better solution - OOP
@@ -123,26 +113,25 @@ public class StoreService {
 		currentProductList = commandOption;
 		switch (commandOption) {
 		case 1:
-			listItemsInStock(OnlineStoreMain.dvds);
-			orderService.addItemToCart(OnlineStoreMain.dvds, getItemToRentOrPurchase("purchase"),
-					getQuantity("purchase"));
+			productLibraryMenu(OnlineStoreMain.dvds);
 			break;
 		case 2:
-			listItemsInStock(OnlineStoreMain.cds);
-			orderService.addItemToCart(OnlineStoreMain.cds, getItemToRentOrPurchase("purchase"),
-					getQuantity("purchase"));
+			productLibraryMenu(OnlineStoreMain.cds);
 			break;
 		case 3:
-			listItemsInStock(OnlineStoreMain.books);
-			orderService.addItemToCart(OnlineStoreMain.books, getItemToRentOrPurchase("purchase"),
-					getQuantity("purchase"));
+			productLibraryMenu(OnlineStoreMain.books);
 			break;
 		case 4:
 			if (OnlineStoreMain.currentOrder.getOrderLines().size() == 0) {
 				System.out.println("You haven't purchased anything yet.");
 				return;
 			}
-			orderService.removeItemFromCart(getItemToRemoveFromCart(), getQuantityOfItemsToRemoveFromCart());
+			int option = getItemToRemoveFromCart();
+			if (option == 0) {
+				break;
+			} else {
+				orderService.removeItemFromCart(option, getQuantityOfItemsToRemoveFromCart());
+			}
 			break;
 		case 5:
 			checkoutOptions();
@@ -151,7 +140,36 @@ public class StoreService {
 			System.out.println("This is not a valid option.");
 			break;
 		}
+	}
 
+	private void productLibraryMenu(ArrayList<? extends Product> productList) {
+		int option;
+		listItemsInStock(productList);
+		do {
+			
+			System.out.println(
+					"\t1. Sort by title. \n\t2. Sort by price. \n\t3. Purchase product. \n\t4. Rent product. \n\t5. Return to products menu.");
+			option = getUserOption();
+			switch (option) {
+			case 1:
+				listItemsInStock(sortByTitle(productList));
+				break;
+			case 2:
+				listItemsInStock(sortByPrice(productList));
+				break;
+			case 3:
+				purchaseItem(productList, "purchase");
+				break;
+			case 4:
+				purchaseItem(productList, "rent");
+				break;
+			case 5:
+				break;
+			default:
+				System.out.println("Invalid option.");
+				break;
+			}
+		} while (option != 5);
 	}
 
 	private void checkoutOptions() {
@@ -184,16 +202,27 @@ public class StoreService {
 		return getUserOption();
 	}
 
-	private int getQuantity(String rentOrPurchase) {
+	private void purchaseItem(ArrayList<? extends Product> list, String rentOrPurchase) {
+		int itemToGet = getItemToRentOrPurchase(rentOrPurchase);
+		int quantityToGet;
+		if ((itemToGet < 0 || itemToGet >= list.size())) {
+			System.out.println("Invalid option.");
+		} else {
+			quantityToGet = getQuantityOfItemToRentOrPurchase(rentOrPurchase);
+			orderService.addItemToCart(list, itemToGet, quantityToGet);
+		}
+	}
+
+	private int getQuantityOfItemToRentOrPurchase(String rentOrPurchase) {
 		System.out.printf("How many items do you wish to %s ? The maximum is 100 items.", rentOrPurchase);
 		System.out.println();
 		int quantity;
 		do {
 			quantity = getUserOption();
-			if (quantity > 100 || quantity < 0) {
+			if (quantity > 100 || quantity <= 0) {
 				System.out.println("Please type a valid number.");
 			}
-		} while (quantity > 100 || quantity < 0);
+		} while (quantity > 100 || quantity <= 0);
 		return quantity;
 	}
 
@@ -203,8 +232,15 @@ public class StoreService {
 		System.out.println("Which item do you want to remove from your cart?");
 		orderService.showItemsInCart();
 		System.out.println();
-		System.out.println("Press 0 if you've changed your mind.");
-		return getUserOption();
+		int option;
+		do {
+			System.out.println("Press 0 if you've changed your mind.");
+			option = getUserOption();
+			if (option < 0 || option >= OnlineStoreMain.currentOrder.getOrderLines().size()) {
+				System.out.println("Invalid option.");
+			}
+		} while (option < 0 || option >= OnlineStoreMain.currentOrder.getOrderLines().size());
+		return option;
 	}
 
 	private int getQuantityOfItemsToRemoveFromCart() {

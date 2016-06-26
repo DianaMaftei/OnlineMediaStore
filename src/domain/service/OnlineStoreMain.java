@@ -46,9 +46,9 @@ public class OnlineStoreMain {
 	}
 
 	private static void loadDatabaseOfClients() throws Exception {
-		// read from file the database of existing clients
 		clientsDatabase = new FileInputStream("clientsDatabase");
 		clientsProperties = new Properties(){
+			//order clients in properties file
 		    @Override
 		    public synchronized java.util.Enumeration<Object> keys() {
 		        return java.util.Collections.enumeration(new java.util.TreeSet<Object>(super.keySet()));
@@ -59,8 +59,6 @@ public class OnlineStoreMain {
 	}
 
 	private static void loadDatabaseOfProducts() throws Exception {
-		// read from file the products
-		
 		ProductDAO<CD> cdDAO = new CdDAO();
 		ProductDAO<DVD> dvdDAO = new DvdDAO();
 		ProductDAO<Book> bookDAO = new BookDAO();
