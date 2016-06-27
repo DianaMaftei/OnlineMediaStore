@@ -78,7 +78,7 @@ public class StoreService {
 			productLibraryMenu(OnlineStoreMain.books);
 			break;
 		case 4:
-			if (OnlineStoreMain.currentOrder.getOrderLines().size() == 0) {
+			if (OnlineStoreMain.currentOrder.getCustomerOrders().size() == 0) {
 				System.out.println("You haven't purchased anything yet.");
 				return;
 			}
@@ -138,7 +138,7 @@ public class StoreService {
 				new Login().loginRegisteredUser(new Register().registerCustomer());
 				System.out.println("Welcome " + Login.getCurrentUser().getName() + "!");
 				ShoppingCart tempOrder = new ShoppingCart(Login.getCurrentUser().getUserID());
-				tempOrder.setOrderLines(OnlineStoreMain.currentOrder.getOrderLines());
+				tempOrder.setCustomerOrders(OnlineStoreMain.currentOrder.getCustomerOrders());
 				OnlineStoreMain.currentOrder = tempOrder;
 				return;
 			} else if (3 == choice) {
@@ -158,7 +158,7 @@ public class StoreService {
 			System.out.println("Invalid option.");
 		} else {
 			quantityToGet = customerMenu.getQuantityOfItemToAddToCart(rentOrPurchase);
-			shoppingCartService.addItemToCart(list, itemToGet, quantityToGet);
+			shoppingCartService.addItemToCart(list, itemToGet, quantityToGet, rentOrPurchase);
 		}
 	}
 

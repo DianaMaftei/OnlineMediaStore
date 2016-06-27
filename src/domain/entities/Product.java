@@ -9,16 +9,21 @@ public abstract class Product {
 	private double price;
 	private Genre genre;
 	private String description;
+	private PriceCategory priceCategory;
+	private AgeCategory ageCategory;
 
 	public Product() {
 
 	}
 
-	public Product(String title, double price, Genre genre, String description) {
+	public Product(String title, double price, Genre genre, String description, PriceCategory priceCategory,
+			AgeCategory ageCategory) {
 		this.title = title;
 		this.price = price;
 		this.genre = genre;
+		this.priceCategory = priceCategory;
 		this.description = description;
+		this.ageCategory = ageCategory;
 	}
 
 	public String getTitle() {
@@ -52,6 +57,23 @@ public abstract class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public PriceCategory getPriceCategory() {
+		return priceCategory;
+	}
+
+	public AgeCategory getAgeCategory() {
+		return ageCategory;
+	}
+	
+	public void setPriceCategory(PriceCategory priceCategory) {
+		this.priceCategory = priceCategory;
+	}
+
+	public void setAgeCategory(AgeCategory ageCategory) {
+		this.ageCategory = ageCategory;
+	}
+
 
 	@Override
 	public String toString() {
@@ -89,5 +111,12 @@ public abstract class Product {
 		return false;
 	}
 
+	public enum AgeCategory {
+		GENERAL_AUDIENCE, EIGHTEEN_PLUS, CHILDREN
+	}
 
+	public enum PriceCategory {
+		NEW_RELEASE, REGULAR, INFREQUENTLY_RENTED
+
+	}
 }

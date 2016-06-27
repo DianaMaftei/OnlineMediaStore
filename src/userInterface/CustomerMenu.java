@@ -47,10 +47,10 @@ public class CustomerMenu {
 		do {
 			System.out.println("Press 0 if you've changed your mind.");
 			option = getUserOption();
-			if (option < 0 || option > OnlineStoreMain.currentOrder.getOrderLines().size()) {
+			if (option < 0 || option > OnlineStoreMain.currentOrder.getCustomerOrders().size()) {
 				System.out.println("Invalid option.");
 			}
-		} while (option < 0 || option > OnlineStoreMain.currentOrder.getOrderLines().size());
+		} while (option < 0 || option > OnlineStoreMain.currentOrder.getCustomerOrders().size());
 		return option;
 	}
 

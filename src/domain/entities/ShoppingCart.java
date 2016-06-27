@@ -10,20 +10,20 @@ import java.util.Date;
 public class ShoppingCart {
 	private String clientName;
 	private Date issueDate;
-	private ArrayList<CartItem> orderLines;
+	private ArrayList<CartItem> customerOrders;
 
-	public ArrayList<CartItem> getOrderLines() {
-		return orderLines;
+	public ArrayList<CartItem> getCustomerOrders() {
+		return customerOrders;
 	}
 
-	public void setOrderLines(ArrayList<CartItem> orderLines) {
-		this.orderLines = orderLines;
+	public void setCustomerOrders(ArrayList<CartItem> orderLines) {
+		this.customerOrders = orderLines;
 	}
 
 	public ShoppingCart(String clientName) {
 		this.clientName = clientName;
 		this.issueDate = new Date();
-		this.orderLines = new ArrayList<CartItem>();
+		this.customerOrders = new ArrayList<CartItem>();
 	}
 
 	public String getClientName() {
@@ -32,15 +32,15 @@ public class ShoppingCart {
 
 	public double getTotalCost() {
 		double totalCost = 0;
-		for (CartItem line : orderLines) {
-			totalCost += line.getPrice();
+		for (CartItem cartItem : customerOrders) {
+			totalCost += cartItem.getPrice(cartItem.getTypeOfTransaction());
 		}
 		return totalCost;
 	}
 
 	@Override
 	public String toString() {
-		return "Client Name: " + clientName + ", Issue Date: " + issueDate + ", Client Cart: " + orderLines
+		return "Client Name: " + clientName + ", Issue Date: " + issueDate + ", Client Cart: " + customerOrders
 				+ ", Total: " + getTotalCost();
 	}
 

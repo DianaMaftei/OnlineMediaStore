@@ -35,7 +35,7 @@ public class CustomerDAO {
 	public int getNumberOfCustomers() {
 		int index = 1;
 		while (true) {
-			String name = customersProperties.getProperty(String.format("customer%d.name", index));
+			String name = customersProperties.getProperty(String.format("customer[%d].name", index));
 			if (name == null) {
 				return index;
 			}
@@ -46,9 +46,9 @@ public class CustomerDAO {
 	public ArrayList<Customer> getCustomers() {
 		ArrayList<Customer> customerList = new ArrayList<>();
 		for (int i = 1; i < getNumberOfCustomers(); i++) {
-			String name = customersProperties.getProperty("customer" + i + ".name");
-			String userID = customersProperties.getProperty("customer" + i + ".userID");
-			String password = customersProperties.getProperty("customer" + i + ".password");
+			String name = customersProperties.getProperty("customer[" + i + "].name");
+			String userID = customersProperties.getProperty("customer[" + i + "].userID");
+			String password = customersProperties.getProperty("customer[" + i + "].password");
 			Customer customer = new Customer(name, userID, password);
 			customerList.add(customer);
 		}

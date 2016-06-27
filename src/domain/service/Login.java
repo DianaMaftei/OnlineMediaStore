@@ -38,11 +38,11 @@ public class Login {
 	}
 	
 	private boolean loginUser(String userID, String password) {
-		for (Customer user : OnlineStoreMain.getCustomers()) {
-			if (userID.equalsIgnoreCase(user.getUserID())) {
-				if (password.equalsIgnoreCase(user.getPassword())) {
+		for (Customer customer : OnlineStoreMain.getCustomers()) {
+			if (userID.equalsIgnoreCase(customer.getUserID())) {
+				if (password.equalsIgnoreCase(customer.getPassword())) {
 					System.out.println("You've successfully logged in!");
-					currentUser = user;
+					currentUser = customer;
 					return true;
 				}
 				System.out.println("Invalid password. Please retry!");

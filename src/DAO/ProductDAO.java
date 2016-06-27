@@ -10,14 +10,14 @@ import java.util.Properties;
 
 import domain.entities.Genre;
 import domain.entities.Product;
+import domain.entities.Product.AgeCategory;
+import domain.entities.Product.PriceCategory;
 
 /**
  *
  * @author diana.maftei[at]gmail.com
  */
 public abstract class ProductDAO<T extends Product> {
-
-	// TODO find a generalized way to get rid of separate DAOs
 
 	Properties productsProperties = new Properties();
 
@@ -67,6 +67,8 @@ public abstract class ProductDAO<T extends Product> {
 		product.setPrice(Double.valueOf(readMediaAttribute("price", indexInPropertiesFile)));
 		product.setGenre(Genre.valueOf(readMediaAttribute("genre", indexInPropertiesFile)));
 		product.setDescription(readMediaAttribute("description", indexInPropertiesFile));
+		product.setPriceCategory(PriceCategory.valueOf(readMediaAttribute("priceCategory", indexInPropertiesFile)));
+		product.setAgeCategory(AgeCategory.valueOf(readMediaAttribute("ageCategory", indexInPropertiesFile)));
 	}
 
 	
@@ -102,6 +104,4 @@ public abstract class ProductDAO<T extends Product> {
 	}
 
 	
-
-
 }

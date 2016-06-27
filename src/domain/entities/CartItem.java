@@ -1,20 +1,32 @@
 package domain.entities;
+
 /**
-*
-*@author diana.maftei[at]gmail.com
-*/
+ *
+ * @author diana.maftei[at]gmail.com
+ */
 public class CartItem {
 	private Product product;
 	private int quantity;
+	private String typeOfTransaction;
+	private int daysRented;
 
-	public CartItem(Product product, int quantity) {
+	public CartItem(Product product, int quantity, String typeOfTransaction) {
 		super();
+		this.typeOfTransaction = typeOfTransaction;
 		this.product = product;
 		this.quantity = quantity;
 	}
 
-	public double getPrice() {
+	public double getPrice(String typeOfTransaction) {
+		// TODO figure out for rent vs purchase
+		// - 10% pe zi din pretul de vanzare la DVD-uri.
+		//- 2% pe zi din pretul de vanzare la Books.
+		//- 5% pe zi din pretul de vanzare la CD-uri.
 		return product.getPrice() * quantity;
+	}
+
+	public String getTypeOfTransaction() {
+		return typeOfTransaction;
 	}
 
 	public Product getProduct() {
@@ -23,15 +35,29 @@ public class CartItem {
 
 	public int getQuantity() {
 		return quantity;
-	}	
+	}
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	public int getDaysRented() {
+		return daysRented;
+	}
+
+	public void setDaysRented(int daysRented) {
+		this.daysRented = daysRented;
+	}
 
 	@Override
 	public String toString() {
-		return "Product: " + product.getTitle() + ", Quantity: " + quantity + ", Price: $" + product.getPrice() + " per item";
+		if ("rent".equals(this.typeOfTransaction)) {
+			return typeOfTransaction + " - " + product.getTitle() + ", Quantity: " + quantity + ", Days rented: " + daysRented + ", Price: $"
+					+ product.getPrice();
+		} else {
+			return typeOfTransaction + " - " + product.getTitle() + ", Quantity: " + quantity + ", Price: $"
+					+ product.getPrice() + " per item";
+		}
 	}
 
 	@Override
@@ -49,12 +75,10 @@ public class CartItem {
 			return true;
 		if (obj == null)
 			return false;
-		if(((CartItem)obj).getProduct().equals(this.getProduct())){
+		if (((CartItem) obj).getProduct().equals(this.getProduct())) {
 			return true;
 		}
 		return false;
 	}
 
-
-	
 }

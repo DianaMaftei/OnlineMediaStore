@@ -44,9 +44,9 @@ public class Register {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		properties.setProperty(String.format("customer%d.name", currentCustomerIndex), fullName);
-		properties.setProperty(String.format("customer%d.userID", currentCustomerIndex), userID);
-		properties.setProperty(String.format("customer%d.password", currentCustomerIndex), password);
+		properties.setProperty(String.format("customer[%d].name", currentCustomerIndex), fullName);
+		properties.setProperty(String.format("customer[%d].userID", currentCustomerIndex), userID);
+		properties.setProperty(String.format("customer[%d].password", currentCustomerIndex), password);
 		try {
 			properties.store(new FileOutputStream("customersDatabase"), null);
 		} catch (FileNotFoundException e) {
