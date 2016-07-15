@@ -1,5 +1,5 @@
 DVD1.title = Game of Thrones
-DVD1.price = 12.33
+DVD1.price = 33.96
 DVD1.genre = SERIES
 DVD1.description = Dragons, nudidy and violence
 DVD1.seasonNo = 3
@@ -9,7 +9,7 @@ DVD1.ageCategory = EIGHTEEN_PLUS
 
 
 DVD2.title = Adventure Time
-DVD2.price = 7.99
+DVD2.price = 19.21
 DVD2.genre = CHILDRENS_SERIES
 DVD2.description = American animated television series created by Pendlton Ward for Cartoon Network
 DVD2.seasonNo = 2
@@ -18,16 +18,16 @@ DVD2.priceCategory = REGULAR
 DVD2.ageCategory = CHILDREN
 
 DVD3.title = SupernaturalS11
-DVD3.price = 9.99
+DVD3.price = 38.45
 DVD3.genre = SERIES
-DVDd3.description = American tv series about two brothers fighting super-natural creatures
+DVD3.description = American tv series about two brothers fighting super-natural creatures
 DVD3.seasonNo = 11
 DVD3.director = Eric Kripke
 DVD3.priceCategory = NEW_RELEASE
 DVD3.ageCategory = GENERAL_AUDIENCE
 
 DVD4.title = The Grudge
-DVD4.price = 9.74
+DVD4.price = 5.74
 DVD4.genre = HORROR
 DVD4.description = A Japanese spirit tries to possess people
 DVD4.seasonNo = 0
@@ -35,8 +35,17 @@ DVD4.director = Takashi Shimizu
 DVD4.priceCategory = INFREQUENTLY_RENTED
 DVD4.ageCategory = EIGHTEEN_PLUS
 
+DVD5.title = Test Product
+DVD5.price = 100
+DVD5.genre = SERIES
+DVD5.description = An item to test the discount algo
+DVD5.seasonNo = 2
+DVD5.director = Me Me
+DVD5.priceCategory = INFREQUENTLY_RENTED
+DVD5.ageCategory = CHILDREN
+
 CD1.title = TRalala
-CD1.price = 3.50
+CD1.price = 7.50
 CD1.genre = POP
 CD1.description = Hippy Hippy Shake
 CD1.artist = SomeoneBand
@@ -54,7 +63,7 @@ CD2.priceCategory = NEW_RELEASE
 CD2.ageCategory = EIGHTEEN_PLUS
 
 CD3.title = Purple Cows
-CD3.price = 5.99
+CD3.price = 11.49
 CD3.genre = HIP_HOP
 CD3.description = A soulful rendition of one's inner fears while high
 CD3.artist = Big Lenny
@@ -73,7 +82,7 @@ CD4.ageCategory = GENERAL_AUDIENCE
 
 
 Book1.title = HitchHiker's Guide to the Galaxy
-Book1.price = 19.99
+Book1.price = 11.90
 Book1.genre = SCI_FI
 Book1.description = Whatever you do, don't panic
 Book1.authors = Douglas Adams/
@@ -83,7 +92,7 @@ Book1.priceCategory = REGULAR
 Book1.ageCategory = GENERAL_AUDIENCE
 
 Book2.title = The Feasting Games
-Book2.price = 15.50
+Book2.price = 6.70
 Book2.genre = HISTORICAL
 Book2.description = Those were the best of times, those were the worst of times
 Book2.authors = That one guy/That other guy/

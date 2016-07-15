@@ -2,7 +2,7 @@ package domain.service;
 
 import java.util.ArrayList;
 
-import DAO.ProductDAO;
+import DAO.properties.ProductDAO;
 import domain.entities.Product;
 import domain.entities.ShoppingCart;
 import userInterface.CustomerMenu;
@@ -18,34 +18,36 @@ public class StoreService {
 
 	public static ShoppingCartService shoppingCartService = new ShoppingCartService();
 
-	// TODO be able to return from login in case user changes their mind
-
 	private boolean selectLoginOption(int userOption) {
 		switch (userOption) {
 		case 1:
 			new Login().doLogin();
-			if(Login.getCurrentUser() == null){
+			if (Login.getCurrentCustomer() == null) {
 				return false;
 			}
-			OnlineStoreMain.currentOrder = new ShoppingCart(Login.getCurrentUser().getName());
+			OnlineStoreMain.currentOrder = new ShoppingCart(
+					Login.getCurrentCustomer().getCustomerID());
 			break;
 		case 2:
 			// register a new user and log them in automatically
 			new Login().loginRegisteredUser(new Register().registerCustomer());
-			if(Login.getCurrentUser() == null){
+			if (Login.getCurrentCustomer() == null) {
 				return false;
 			}
-			OnlineStoreMain.currentOrder = new ShoppingCart(Login.getCurrentUser().getName());
+			OnlineStoreMain.currentOrder = new ShoppingCart(
+					Login.getCurrentCustomer().getCustomerID());
 			break;
 		case 3:
-			OnlineStoreMain.currentOrder = new ShoppingCart("guest");
+			new Login().loginGuest();
+			OnlineStoreMain.currentOrder = new ShoppingCart(
+					Login.getCurrentCustomer().getCustomerID());
 			System.out.println("Welcome guest!");
 			return true;
 		default:
 			System.out.println("Invalid option. Please choose one of the above.");
 			return false;
 		}
-		System.out.println("Welcome " + Login.getCurrentUser().getName() + "!");
+		System.out.println("Welcome " + Login.getCurrentCustomer().getName() + "!");
 		return true;
 	}
 
@@ -78,7 +80,7 @@ public class StoreService {
 			productLibraryMenu(OnlineStoreMain.books);
 			break;
 		case 4:
-			if (OnlineStoreMain.currentOrder.getCustomerOrders().size() == 0) {
+			if (OnlineStoreMain.currentOrder.getItemsOrdered().size() == 0) {
 				System.out.println("You haven't purchased anything yet.");
 				return;
 			}
@@ -102,8 +104,8 @@ public class StoreService {
 		int option;
 		productDAO.listItemsInStock(productList);
 		do {
-			System.out.println(
-					"\t1. Sort by title. \n\t2. Sort by price. \n\t3. Purchase product. \n\t4. Rent product. \n\t5. Return to products menu.");
+			System.out.println("\t1. Sort by title. \n" + "\t2. Sort by price. \n" + "\t3. Purchase product. \n"
+					+ "\t4. Rent product. \n\t5. Return to products menu.");
 			option = customerMenu.getUserOption();
 			switch (option) {
 			case 1:
@@ -113,10 +115,13 @@ public class StoreService {
 				productDAO.listItemsInStock(productDAO.sortByPrice(productList));
 				break;
 			case 3:
+				if ("guest".equals(OnlineStoreMain.currentOrder.getCustomerID())) {
+					System.out.println("Login with a valid account to benefit from discounts.");
+				}
 				purchaseItem(productList, "purchase");
 				break;
 			case 4:
-				purchaseItem(productList, "rent");
+				purchaseItem(productList, "rental");
 				break;
 			case 5:
 				break;
@@ -126,19 +131,18 @@ public class StoreService {
 			}
 		} while (option != 5);
 	}
-	
+
 	private void checkoutOptions() {
-		if (Login.getCurrentUser() == null) {
-			System.out.println("You must login or register with a new account in order to complete your purchase. "
-					+ "\nDo you want to: \n\t1. Login \n\t2. Register \n\t3. Continue browsing?");
-			int choice = customerMenu.getUserOption();
-			if (1 ==choice) {
+		if ("guest".equals(Login.getCurrentCustomer().getCustomerID())) {
+			int choice = customerMenu.getCheckoutOption();
+			if (1 == choice) {
 				new Login().doLogin();
 			} else if (2 == choice) {
 				new Login().loginRegisteredUser(new Register().registerCustomer());
-				System.out.println("Welcome " + Login.getCurrentUser().getName() + "!");
-				ShoppingCart tempOrder = new ShoppingCart(Login.getCurrentUser().getUserID());
-				tempOrder.setCustomerOrders(OnlineStoreMain.currentOrder.getCustomerOrders());
+				System.out.println("Welcome " + Login.getCurrentCustomer().getName() + "!");
+				ShoppingCart tempOrder = new ShoppingCart(
+						Login.getCurrentCustomer().getCustomerID());
+				tempOrder.setCustomerOrders(OnlineStoreMain.currentOrder.getItemsOrdered());
 				OnlineStoreMain.currentOrder = tempOrder;
 				return;
 			} else if (3 == choice) {
@@ -151,14 +155,20 @@ public class StoreService {
 		}
 	}
 
-	private void purchaseItem(ArrayList<? extends Product> list, String rentOrPurchase) {
-		int itemToGet = customerMenu.getItemToRentOrPurchase(rentOrPurchase);
+	private void purchaseItem(ArrayList<? extends Product> list, String rentalOrPurchase) {
+		int itemToGet = customerMenu.getItemToRentOrPurchase();
 		int quantityToGet;
+		int daysRented;
 		if ((itemToGet < 0 || itemToGet > list.size())) {
 			System.out.println("Invalid option.");
 		} else {
-			quantityToGet = customerMenu.getQuantityOfItemToAddToCart(rentOrPurchase);
-			shoppingCartService.addItemToCart(list, itemToGet, quantityToGet, rentOrPurchase);
+			if ("rental".equals(rentalOrPurchase)) {
+				daysRented = customerMenu.getNumberOfDaysToRent();
+				shoppingCartService.addItemToCart(list, itemToGet, daysRented, 0, rentalOrPurchase);
+				return;
+			}
+			quantityToGet = customerMenu.getQuantityOfItemToAddToCart();
+			shoppingCartService.addItemToCart(list, itemToGet, 0, quantityToGet, rentalOrPurchase);
 		}
 	}
 

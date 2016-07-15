@@ -1,4 +1,5 @@
 package domain.entities;
+
 /**
 *
 *@author diana.maftei[at]gmail.com

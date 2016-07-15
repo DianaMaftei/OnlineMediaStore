@@ -1,14 +1,10 @@
 package domain.service;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import DAO.CustomerDAO;
+import DAO.properties.CustomerDAO;
 import domain.entities.Customer;
 
 /**
@@ -30,30 +26,8 @@ public class Register {
 		}
 		Customer newCustomer = new Customer(fullName, userID, password);
 		OnlineStoreMain.getCustomers().add(newCustomer);
-		updateDatabaseWithNewUser();
+		CustomerDAO.getInstance().updateDatabaseWithNewUser(fullName, userID, password);
 		return newCustomer;
-	}
-
-	private void updateDatabaseWithNewUser() {
-		CustomerDAO customerDAO = new CustomerDAO();
-		Properties properties = customerDAO.customersProperties;
-		int currentCustomerIndex = customerDAO.getNumberOfCustomers();
-		try {
-			properties.load(customerDAO.customersDatabase);
-			customerDAO.customersDatabase.close();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		properties.setProperty(String.format("customer[%d].name", currentCustomerIndex), fullName);
-		properties.setProperty(String.format("customer[%d].userID", currentCustomerIndex), userID);
-		properties.setProperty(String.format("customer[%d].password", currentCustomerIndex), password);
-		try {
-			properties.store(new FileOutputStream("customersDatabase"), null);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	private void getRegisterInfo() {
@@ -78,7 +52,7 @@ public class Register {
 
 	private boolean doesUserExist(String userID) {
 		for (Customer customer : OnlineStoreMain.getCustomers()) {
-			if (userID.equalsIgnoreCase(customer.getUserID())) {
+			if (userID.equalsIgnoreCase(customer.getCustomerID())) {
 				System.out.println("This userID already exists. Please choose another.");
 				return true;
 			}

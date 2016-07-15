@@ -1,4 +1,4 @@
-package DAO;
+package DAO.properties;
 
 import java.io.FileInputStream;
 import java.io.InputStream;

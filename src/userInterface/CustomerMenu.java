@@ -47,15 +47,29 @@ public class CustomerMenu {
 		do {
 			System.out.println("Press 0 if you've changed your mind.");
 			option = getUserOption();
-			if (option < 0 || option > OnlineStoreMain.currentOrder.getCustomerOrders().size()) {
+			if (option < 0 || option > OnlineStoreMain.currentOrder.getItemsOrdered().size()) {
 				System.out.println("Invalid option.");
 			}
-		} while (option < 0 || option > OnlineStoreMain.currentOrder.getCustomerOrders().size());
+		} while (option < 0 || option > OnlineStoreMain.currentOrder.getItemsOrdered().size());
 		return option;
 	}
+	
+	public int getNumberOfDaysToRent(){
+		System.out.printf("For how many days do you wish to rent ? The maximum is 7 days.");
+		System.out.println();
+		int quantity;
+		do {
+			quantity = getUserOption();
+			if (quantity > 7 || quantity <= 0) {
+				System.out.println("Please type a valid number.");
+			}
+		} while (quantity > 7 || quantity <= 0);
+		return quantity;
+		
+	}
 
-	public int getQuantityOfItemToAddToCart(String rentOrPurchase) {
-		System.out.printf("How many items do you wish to %s ? The maximum is 100 items.", rentOrPurchase);
+	public int getQuantityOfItemToAddToCart() {
+		System.out.printf("How many items do you wish to purchase ? The maximum is 100 items.");
 		System.out.println();
 		int quantity;
 		do {
@@ -72,9 +86,14 @@ public class CustomerMenu {
 		return getUserOption();
 	}
 
-	public int getItemToRentOrPurchase(String rentOrPurchase) {
-		System.out.printf("Which item would you like to %s?", rentOrPurchase);
-		System.out.println();
+	public int getItemToRentOrPurchase() {
+		System.out.println("Which item would you like to get?");
+		return getUserOption();
+	}
+	
+	public int getCheckoutOption(){
+		System.out.println("You must login or register with a new account in order to complete your purchase. "
+				+ "\nDo you want to: \n\t1. Login \n\t2. Register \n\t3. Continue browsing?");
 		return getUserOption();
 	}
 

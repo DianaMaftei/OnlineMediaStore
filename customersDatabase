@@ -1,43 +1,46 @@
+#Thu Jul 14 13:50:28 EEST 2016
+customer[1].cart[1].cartItem[1].daysRented=0
+customer[1].cart[1].cartItem[1].quantity=1
+customer[1].cart[1].cartItem[1].title=Adventure Time
+customer[1].cart[1].cartItem[1].typeOfTransaction=purchase
+customer[1].cart[1].dateIssued=2016/07/14 01\:41\:41
+customer[1].cart[2].cartItem[1].daysRented=0
+customer[1].cart[2].cartItem[1].quantity=1
+customer[1].cart[2].cartItem[1].title=Blood And Guts
+customer[1].cart[2].cartItem[1].typeOfTransaction=purchase
+customer[1].cart[2].dateIssued=2016/07/14 01\:49\:36
+customer[1].cart[3].cartItem[1].daysRented=4
+customer[1].cart[3].cartItem[1].quantity=0
+customer[1].cart[3].cartItem[1].title=The Feasting Games
+customer[1].cart[3].cartItem[1].typeOfTransaction=rental
+customer[1].cart[3].dateIssued=2016/07/14 01\:50\:18
+customer[1].loyaltyPoints=6
 customer[1].name=Maftei Diana
 customer[1].password=0000
-customer[1].userID=dianaM
 customer[1].paymentCategory=PREPAYER
-customer[1].cart[1].cartItem[1].name = Game of Thrones
-customer[1].cart[1].cartItem[1].quantity = 1
-customer[1].cart[1].cartItem[1].typeOfTransaction = purchase
-customer[1].cart[1].cartItem[1].daysRented = 0
-
-customer[1].cart[1].cartItem[2].name = SupernaturalS11
-customer[1].cart[1].cartItem[2].quantity = 1
-customer[1].cart[1].cartItem[2].typeOfTransaction = rent
-customer[1].cart[1].cartItem[2].daysRented = 2
-
-customer[1].cart[2].cartItem[1].name = SupernaturalS11
-customer[1].cart[2].cartItem[1].quantity = 1
-customer[1].cart[2].cartItem[1].typeOfTransaction = rent
-customer[1].cart[2].cartItem[1].daysRented = 2
-
-customer[1].cart[2].cartItem[1].name = HitchHiker's Guide to the Galaxy
-customer[1].cart[1].cartItem[1].quantity = 2
-customer[1].cart[1].cartItem[1].typeOfTransaction = purchase
-customer[1].cart[2].cartItem[1].daysRented = 0
-
+customer[1].userID=dianaM
+customer[2].loyaltyPoints=0
 customer[2].name=Stefanescu Anca
-customer[2].password=1111
+customer[2].password=ancaS123
+customer[2].paymentCategory=REGULAR
 customer[2].userID=ancaS
-customer[2].paymentCategory=PREPAYER
-
+customer[3].loyaltyPoints=0
 customer[3].name=Georgescu Cristina
-customer[3].password=2222
+customer[3].password=cristinaG123
+customer[3].paymentCategory=PREPAYER
 customer[3].userID=cristinaG
-customer[3].paymentCategory=REGULAR
-
+customer[4].loyaltyPoints=0
 customer[4].name=Atanasei Ion
-customer[4].password=3333
-customer[4].userID=ionA
+customer[4].password=ionA123
 customer[4].paymentCategory=BAD_PAYER
-
+customer[4].userID=ionA
+customer[5].loyaltyPoints=0
 customer[5].name=Dumitras Sebi
-customer[5].password=4444
-customer[5].userID=sebiD
+customer[5].password=sebiD123
 customer[5].paymentCategory=REGULAR
+customer[5].userID=sebiD
+customer[6].loyaltyPoints=0
+customer[6].name=Dumitrescu Gigi
+customer[6].password=gigiD123
+customer[6].paymentCategory=REGULAR
+customer[6].userID=gigiD

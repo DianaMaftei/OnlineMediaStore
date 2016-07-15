@@ -4,7 +4,7 @@ import java.util.ArrayList;
 *
 *@author diana.maftei[at]gmail.com
 */
-public class Book extends Product{
+public class Book extends Product {
 	
 	private ArrayList<String> authors;
 	private int noOfPages;
