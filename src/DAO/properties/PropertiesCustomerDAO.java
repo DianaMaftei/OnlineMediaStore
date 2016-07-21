@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
+import DAO.CustomerDAO;
 import domain.entities.CartItem;
 import domain.entities.Customer;
 import domain.entities.Product;
@@ -24,18 +25,18 @@ import domain.service.OnlineStoreMain;
  *
  * @author diana.maftei[at]gmail.com
  */
-public class CustomerDAO {
+public class PropertiesCustomerDAO implements CustomerDAO {
 
 	public Properties customersProperties = new Properties();
 	public InputStream customersDatabase;
 
-	private static CustomerDAO customerDao = new CustomerDAO();
+	private static CustomerDAO customerDao = new PropertiesCustomerDAO();
 
 	public static CustomerDAO getInstance() {
 		return customerDao;
 	}
 
-	private CustomerDAO() {
+	public PropertiesCustomerDAO() {
 		try (FileInputStream customersDatabase = new FileInputStream("customersDatabase")) {
 			customersProperties = new Properties() {
 				// order customers in properties file
@@ -50,7 +51,10 @@ public class CustomerDAO {
 		}
 	}
 
-	public int getNumberOfCustomers() {
+	/* (non-Javadoc)
+	 * @see DAO.properties.CustomerDAO#getNumberOfCustomers()
+	 */
+	private int getNumberOfCustomers() {
 		int index = 1;
 		while (true) {
 			String name = customersProperties.getProperty(String.format("customer[%d].name", index));
@@ -62,6 +66,10 @@ public class CustomerDAO {
 	}
 	// TODO search in prop, only return current loggedin, if matching info
 
+	/* (non-Javadoc)
+	 * @see DAO.properties.CustomerDAO#getCustomers()
+	 */
+	@Override
 	public ArrayList<Customer> getCustomers() {
 		ArrayList<Customer> customerList = new ArrayList<>();
 		for (int i = 1; i < getNumberOfCustomers(); i++) {
@@ -89,6 +97,10 @@ public class CustomerDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see DAO.properties.CustomerDAO#updateCustomerLoyaltyPoints()
+	 */
+	@Override
 	public void updateCustomerLoyaltyPoints() {
 		Properties properties = customersProperties;
 		int currentCustomerIndex = getCurrentCustomerIndex();
@@ -109,6 +121,10 @@ public class CustomerDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see DAO.properties.CustomerDAO#updateDatabaseWithNewUser(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
 	public void updateDatabaseWithNewUser(String fullName, String userID, String password) {
 		Properties properties = customersProperties;
 		int currentCustomerIndex = getNumberOfCustomers();
@@ -131,6 +147,10 @@ public class CustomerDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see DAO.properties.CustomerDAO#setCustomerHistory(domain.entities.ShoppingCart)
+	 */
+	@Override
 	public void setCustomerHistory(ShoppingCart currentShoppingCart) {
 		Properties properties = customersProperties;
 		int cartIndex = Login.getCurrentCustomer().getCustomerOrders().size() + 1;
@@ -180,6 +200,10 @@ public class CustomerDAO {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see DAO.properties.CustomerDAO#getCustomerHistory()
+	 */
+	@Override
 	public ArrayList<ShoppingCart> getCustomerHistory() {
 		ArrayList<ShoppingCart> history = new ArrayList<ShoppingCart>();
 		int cartIndex = 1;

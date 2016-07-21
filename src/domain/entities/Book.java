@@ -1,24 +1,35 @@
 package domain.entities;
-import java.util.ArrayList;
+
+import java.util.List;
+
 /**
-*
-*@author diana.maftei[at]gmail.com
-*/
+ *
+ * @author diana.maftei[at]gmail.com
+ */
 public class Book extends Product {
-	
-	private ArrayList<String> authors;
+
+	private List<String> authors;
 	private int noOfPages;
 	private String publishingHouse;
-	
+
 	public Book() {
 		super();
 	}
-	
-	public ArrayList<String> getAuthors() {
+
+	public List<String> getAuthors() {
 		return authors;
 	}
 
-	public void setAuthors(ArrayList<String> authors) {
+	private String getAuthorsAsString() {
+		String listOfAuthors = "";
+		for (int i = 0; i < authors.size() - 1; i++) {
+			listOfAuthors += authors.get(i) + ", ";
+		}
+		listOfAuthors += authors.get(authors.size() - 1);
+		return listOfAuthors;
+	}
+
+	public void setAuthors(List<String> authors) {
 		this.authors = authors;
 	}
 
@@ -40,10 +51,9 @@ public class Book extends Product {
 
 	@Override
 	public String toString() {
-		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: " + getDescription() + "\nAuthors: " + authors + "\nNumber of Pages: " + noOfPages + "\nPublishing House: " + publishingHouse + "\n";
+		return "Title: " + getTitle() + "\nPrice: " + getPrice() + "\nGenre: " + getGenre() + "\nDescription: "
+				+ getDescription() + "\nAuthors: " + getAuthorsAsString() + "\nNumber of Pages: " + noOfPages
+				+ "\nPublishing House: " + publishingHouse + "\n";
 	}
 
-	
-	
-	
 }

@@ -2,7 +2,7 @@ package domain.service;
 
 import java.util.ArrayList;
 
-import DAO.properties.CustomerDAO;
+import DAO.properties.PropertiesCustomerDAO;
 import domain.entities.CartItem;
 import domain.entities.Product;
 
@@ -85,9 +85,9 @@ public class ShoppingCartService {
 		System.out.println(OnlineStoreMain.currentOrder);
 		System.out.println("Your total is: " + OnlineStoreMain.currentOrder.getTotalCost());
 		System.out.println("~~linked to secure payment option~~");
-		CustomerDAO.getInstance().setCustomerHistory(OnlineStoreMain.currentOrder);
+		PropertiesCustomerDAO.getInstance().setCustomerHistory(OnlineStoreMain.currentOrder);
 		Login.getCurrentCustomer().setLoyaltyPoints(CustomerService.getInstance().calculateLoyaltyPointsAfterNewPurchase(OnlineStoreMain.currentOrder));
-		CustomerDAO.getInstance().updateCustomerLoyaltyPoints();
+		PropertiesCustomerDAO.getInstance().updateCustomerLoyaltyPoints();
 		System.out.println("Thank you for your purchase.");
 		checkedOut = true;
 	}

@@ -6,9 +6,13 @@ package domain.entities;
 */
 public class Track implements IPlayable{
 	String title;
-	int duration;
+	String duration;
 	
-	public Track(String title, int duration) {
+	public Track(){
+		
+	}
+	
+	public Track(String title, String duration) {
 		super();
 		this.title = title;
 		this.duration = duration;
@@ -22,11 +26,11 @@ public class Track implements IPlayable{
 		this.title = title;
 	}
 
-	public int getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(int duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 

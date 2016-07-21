@@ -2,7 +2,9 @@ package domain.service;
 
 import java.util.ArrayList;
 
-import DAO.properties.ProductDAO;
+import domain.entities.Book;
+import domain.entities.CD;
+import domain.entities.DVD;
 import domain.entities.Product;
 import domain.entities.ShoppingCart;
 import userInterface.CustomerMenu;
@@ -13,7 +15,7 @@ import userInterface.CustomerMenu;
  */
 public class StoreService {
 	public static int currentProductList;
-	public ProductDAO productDAO;
+	public ProductService productService = new ProductService();
 	public CustomerMenu customerMenu = new CustomerMenu();
 
 	public static ShoppingCartService shoppingCartService = new ShoppingCartService();
@@ -71,13 +73,13 @@ public class StoreService {
 		currentProductList = commandOption;
 		switch (commandOption) {
 		case 1:
-			productLibraryMenu(OnlineStoreMain.dvds);
+			productLibraryMenu((ArrayList<DVD>) ServiceLocator.getDvdDAO().getAllProducts());
 			break;
 		case 2:
-			productLibraryMenu(OnlineStoreMain.cds);
+			productLibraryMenu((ArrayList<CD>) ServiceLocator.getCdDAO().getAllProducts());
 			break;
 		case 3:
-			productLibraryMenu(OnlineStoreMain.books);
+			productLibraryMenu((ArrayList<Book>) ServiceLocator.getBookDAO().getAllProducts());
 			break;
 		case 4:
 			if (OnlineStoreMain.currentOrder.getItemsOrdered().size() == 0) {
@@ -102,17 +104,17 @@ public class StoreService {
 
 	private void productLibraryMenu(ArrayList<? extends Product> productList) {
 		int option;
-		productDAO.listItemsInStock(productList);
+		productService.listItemsInStock(productList);
 		do {
 			System.out.println("\t1. Sort by title. \n" + "\t2. Sort by price. \n" + "\t3. Purchase product. \n"
 					+ "\t4. Rent product. \n\t5. Return to products menu.");
 			option = customerMenu.getUserOption();
 			switch (option) {
 			case 1:
-				productDAO.listItemsInStock(productDAO.sortByTitle(productList));
+				productService.listItemsInStock(productService.sortByTitle(productList));
 				break;
 			case 2:
-				productDAO.listItemsInStock(productDAO.sortByPrice(productList));
+				productService.listItemsInStock(productService.sortByPrice(productList));
 				break;
 			case 3:
 				if ("guest".equals(OnlineStoreMain.currentOrder.getCustomerID())) {

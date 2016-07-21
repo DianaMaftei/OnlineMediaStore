@@ -2,7 +2,7 @@ package domain.service;
 
 import java.util.Scanner;
 
-import DAO.properties.CustomerDAO;
+import DAO.properties.PropertiesCustomerDAO;
 import domain.entities.Customer;
 
 /**
@@ -32,7 +32,7 @@ public class Login {
 			}
 			loggedIn = loginUser(userID, password);
 			if (loggedIn) {
-				currentCustomer.setCustomerOrders(CustomerDAO.getInstance().getCustomerHistory());
+				currentCustomer.setCustomerOrders(PropertiesCustomerDAO.getInstance().getCustomerHistory());
 				OnlineStoreMain.currentOrder.setCustomerID(userID);
 			}
 		} while (!loggedIn);

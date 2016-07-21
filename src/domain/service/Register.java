@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import DAO.properties.CustomerDAO;
+import DAO.properties.PropertiesCustomerDAO;
 import domain.entities.Customer;
 
 /**
@@ -26,7 +26,7 @@ public class Register {
 		}
 		Customer newCustomer = new Customer(fullName, userID, password);
 		OnlineStoreMain.getCustomers().add(newCustomer);
-		CustomerDAO.getInstance().updateDatabaseWithNewUser(fullName, userID, password);
+		PropertiesCustomerDAO.getInstance().updateDatabaseWithNewUser(fullName, userID, password);
 		return newCustomer;
 	}
 
